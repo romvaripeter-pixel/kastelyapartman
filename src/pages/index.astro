@@ -1,0 +1,145 @@
+---
+import { Image } from 'astro:assets';
+import heroImage from '../assets/images/bedroom01.jpg';
+
+const title = "Kastély Apartman | Eger";
+const description = "Luxus otthon Eger szívében – felújított, elegáns apartman rövid távú kiadásra.";
+---
+
+<html lang="hu">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+	</head>
+	<body>
+		<header class="site-header">
+			<nav>
+				<a href="/" class="logo">Kastély Apartman</a>
+			</nav>
+		</header>
+
+		<main>
+			<section class="hero">
+				<Image
+					src={heroImage}
+					alt="Kastély Apartman"
+					class="hero-image"
+					widths={[640, 1080, 1600, 2000]}
+					sizes="100vw"
+					format="webp"
+					quality={80}
+					loading="eager"
+				/>
+				<div class="hero-overlay"></div>
+				<div class="hero-content">
+					<h1>Kastély Apartman</h1>
+					<p>Luxus otthon Eger szívében</p>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<p>&copy; {new Date().getFullYear()} Kastély Apartman</p>
+		</footer>
+	</body>
+</html>
+
+<style>
+	:global(body) {
+		margin: 0;
+		font-family: system-ui, sans-serif;
+	}
+
+	.site-header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		padding: 1.5rem 2rem;
+	}
+
+	.logo {
+		color: white;
+		text-decoration: none;
+		font-size: 1.1rem;
+		letter-spacing: 0.05em;
+	}
+
+	.hero {
+		position: relative;
+		height: 100vh;
+		width: 100%;
+		overflow: hidden;
+	}
+
+	.hero-image {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.hero-overlay {
+		position: absolute;
+		inset: 0;
+		background: rgba(0, 0, 0, 0.25);
+	}
+
+	.hero-content {
+		position: relative;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+		color: white;
+	}
+
+	.hero-content h1 {
+		font-size: clamp(2rem, 6vw, 4rem);
+		margin: 0;
+		font-weight: 400;
+		letter-spacing: 0.02em;
+	}
+
+	.hero-content p {
+		font-size: clamp(1rem, 2vw, 1.3rem);
+		margin-top: 0.5rem;
+		opacity: 0.9;
+	}
+
+	footer {
+		text-align: center;
+		padding: 2rem;
+		font-size: 0.85rem;
+		color: #666;
+	}
+	.hero-content h1,
+	.hero-content p {
+		opacity: 0;
+		animation: fadeInUp 1s ease-out forwards;
+	}
+
+	.hero-content p {
+		animation-delay: 0.3s;
+	}
+
+	@keyframes fadeInUp {
+		from {
+			opacity: 0;
+			transform: translateY(20px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+</style>
