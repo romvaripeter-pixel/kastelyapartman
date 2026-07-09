@@ -1,0 +1,22 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Welcome from '../../components/Welcome.astro';
+import heroImage from '../../assets/images/bedroom01.jpg';
+---
+
+<Layout
+	title="Kastély Apartman | Eger"
+	description="Luxury home in the heart of Eger – newly renovated, elegant apartment for short-term rental."
+	lang="en"
+>
+	<Hero
+		image={heroImage}
+		title="Kastély Apartman"
+		subtitle="Luxury home in the heart of Eger"
+	/>
+	<Welcome
+		heading="Luxury home in the heart of Eger"
+		text="Enjoy the elegance of a bygone era in our newly renovated home. The spacious Kastély Apartment combines unique elements of contemporary interior design with contemporary details. Located in the heart of the historic city, a stone's throw from the market hall and Dobó Square, the apartment is fully equipped to make it your home. The bedrooms include a master bedroom with a king-size bed and a guest bedroom with two single beds. The sofa in the living room can be converted into a double bed, so a total of 6 guests can sleep in the apartment."
+	/>
+</Layout>

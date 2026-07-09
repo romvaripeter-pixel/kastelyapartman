@@ -1,0 +1,68 @@
+---
+interface Props {
+    title: string;
+    description: string;
+    lang: string;
+}
+
+const { title, description, lang } = Astro.props;
+---
+
+<html lang={lang}>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+    </head>
+    <body>
+        <header class="site-header">
+            <nav>
+                <a href="/" class="logo">Kastély Apartman</a>
+            </nav>
+        </header>
+
+        <main>
+            <slot />
+        </main>
+
+        <footer>
+            <p>&copy; {new Date().getFullYear()} Kastély Apartman</p>
+        </footer>
+    </body>
+</html>
+
+<style>
+	:global(body) {
+		margin: 0;
+		font-family: system-ui, sans-serif;
+	}
+
+	.site-header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 10;
+		padding: 1.5rem 2rem;
+	}
+
+    .logo {
+        color: white;
+        text-decoration: none;
+        font-size: 1.1rem;
+        letter-spacing: 0.05em;
+    }
+
+    main {
+        padding: 0;
+    }
+
+    footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.85rem;
+        color: #666;
+    }
+</style>

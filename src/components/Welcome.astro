@@ -1,0 +1,40 @@
+---
+interface Props {
+	heading: string;
+	text: string;
+}
+
+const { heading, text } = Astro.props;
+---
+
+<section class="welcome">
+	<div class="welcome-inner">
+		<h2>{heading}</h2>
+		<p>{text}</p>
+	</div>
+</section>
+
+<style>
+	.welcome {
+		padding: 6rem 2rem;
+		display: flex;
+		justify-content: center;
+	}
+
+	.welcome-inner {
+		max-width: 700px;
+		text-align: center;
+	}
+
+	.welcome h2 {
+		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		font-weight: 400;
+		margin-bottom: 1.5rem;
+	}
+
+	.welcome p {
+		font-size: 1.05rem;
+		line-height: 1.8;
+		color: #444;
+	}
+</style>
