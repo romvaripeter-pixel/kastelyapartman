@@ -30,6 +30,23 @@ const { title, description, lang } = Astro.props;
         <footer>
             <p>&copy; {new Date().getFullYear()} Kastély Apartman</p>
         </footer>
+		<script>
+			const sections = document.querySelectorAll('.fade-in-section');
+
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							entry.target.classList.add('is-visible');
+							observer.unobserve(entry.target);
+						}
+					});
+				},
+				{ threshold: 0.15 }
+			);
+
+			sections.forEach((section) => observer.observe(section));
+		</script>
     </body>
 </html>
 
@@ -65,4 +82,15 @@ const { title, description, lang } = Astro.props;
         font-size: 0.85rem;
         color: #666;
     }
+	:global(.fade-in-section) {
+		opacity: 0;
+		transform: translateY(30px);
+		transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+	}
+
+	:global(.fade-in-section.is-visible) {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
 </style>

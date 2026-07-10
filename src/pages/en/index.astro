@@ -2,7 +2,13 @@
 import Layout from '../../layouts/Layout.astro';
 import Hero from '../../components/Hero.astro';
 import Welcome from '../../components/Welcome.astro';
+import Services from '../../components/Services.astro';
 import heroImage from '../../assets/images/bedroom01.jpg';
+import livingImg from '../../assets/images/living01.jpg';
+import outsideImg from '../../assets/images/outisde01.jpg';
+import kitchenImg from '../../assets/images/kitchen03.jpg';
+import netflixImg from '../../assets/images/living04_Netflix.jpg';
+import parkingImg from '../../assets/images/parking01.jpg';
 ---
 
 <Layout
@@ -18,5 +24,36 @@ import heroImage from '../../assets/images/bedroom01.jpg';
 	<Welcome
 		heading="Luxury home in the heart of Eger"
 		text="Enjoy the elegance of a bygone era in our newly renovated home. The spacious Kastély Apartment combines unique elements of contemporary interior design with contemporary details. Located in the heart of the historic city, a stone's throw from the market hall and Dobó Square, the apartment is fully equipped to make it your home. The bedrooms include a master bedroom with a king-size bed and a guest bedroom with two single beds. The sofa in the living room can be converted into a double bed, so a total of 6 guests can sleep in the apartment."
+	/>
+	<Services
+		heading="What we offer"
+		intro="We offer a full range of amenities to make your stay comfortable and relaxing. If there's anything you need that you can't find, just ask—we're happy to help!"
+		items={[
+			{
+				image: livingImg,
+				title: "Entire apartment",
+				text: "Enjoy exclusive access to the entire apartment, with plenty of space for families, couples, or groups to relax and feel at home."
+			},
+			{
+				image: outsideImg,
+				title: "Convenient Location",
+				text: "Located just a short walk from Dobó Square and Eger Castle, the apartment offers easy access to the city centre while being tucked away in a quiet corner for a peaceful and relaxing stay."
+			},
+			{
+				image: kitchenImg,
+				title: "Fully equipped kitchen",
+				text: "Whether you prefer cooking your own meals or preparing a quick breakfast, you'll find everything you need, including a kettle, coffee maker, dishwasher, and a wide range of kitchen essentials."
+			},
+			{
+				image: netflixImg,
+				title: "Modern amenities",
+				text: "Stay connected with ultra-fast Wi-Fi, enjoy your favourite streaming services on the 55-inch Smart TV, listen to music through the Sonos smart speaker, or catch up on work at the dedicated desk. Modern comfort and elegance come as standard."
+			},
+			{
+				image: parkingImg,
+				title: "On site parking",
+				text: "Leave your parking worries behind. Our convenient on-site parking allows you to park safely just steps from the apartment."
+			}
+		]}
 	/>
 </Layout>

@@ -3,6 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Welcome from '../components/Welcome.astro';
 import heroImage from '../assets/images/bedroom01.jpg';
+import livingImg from '../assets/images/living01.jpg';
+import outsideImg from '../assets/images/outisde01.jpg';
+import kitchenImg from '../assets/images/kitchen03.jpg';
+import netflixImg from '../assets/images/living04_Netflix.jpg';
+import parkingImg from '../assets/images/parking01.jpg';
+import Services from '../components/Services.astro';
 ---
 
 <Layout
@@ -18,5 +24,36 @@ import heroImage from '../assets/images/bedroom01.jpg';
 	<Welcome
 		heading="Luxus otthon Eger szívében"
 		text="Élvezze egy letűnt korszak eleganciáját újonnan felújított otthonunkban. A tágas Kastély Apartman a korabeli belsőépítészet egyedi elemeit és a kortárs részleteket vegyíti. A történelmi város szívében, a vásárcsarnoktól és a Dobó tértől kőhajításnyira található apartman teljesen felszerelt, hogy az Ön otthona legyen. A hálószobákhoz tartozik egy nagy hálószoba king-size ággyal és egy vendég hálószoba két egyszemélyes ággyal. A nappali kanapéja franciaággyá alakítható, így összesen 6 vendég aludhat az apartmanban."
+	/>
+	<Services
+		heading="Amit kínálunk"
+		intro="Mindent megtalál nálunk, amire egy kényelmes és pihentető tartózkodáshoz szüksége lehet. Ha mégis hiányozna valami, csak szóljon – szívesen segítünk!"
+		items={[
+			{
+				image: livingImg,
+				title: "Teljes lakás",
+				text: "A teljes apartman kizárólag az Ön rendelkezésére áll, így bőséges tér jut a családoknak, pároknak vagy baráti társaságoknak a kikapcsolódásra és feltöltődésre."
+			},
+			{
+				image: outsideImg,
+				title: "Kiváló elhelyezkedés",
+				text: "Az apartman csupán néhány perc sétára található a Dobó tértől és az Egri Vártól. Könnyedén elérheti a belváros legfontosabb látnivalóit, miközben egy csendes, nyugodt környezetben pihenhet."
+			},
+			{
+				image: kitchenImg,
+				title: "Teljesen felszerelt konyha",
+				text: "Akár egy gyors reggelit készítene, akár saját maga főzne, minden szükséges eszközt megtalál a konyhában, beleértve a vízforralót, a kávéfőzőt, a mosogatógépet és számos egyéb konyhai felszerelést."
+			},
+			{
+				image: netflixImg,
+				title: "Modern kényelmi szolgáltatások",
+				text: "Élvezze a villámgyors Wi-Fit, nézze kedvenc műsorait az 55 colos okostévén, hallgasson zenét a Sonos okoshangszórón keresztül, vagy dolgozzon kényelmesen a dedikált munkasarokban. Elegancia a mai elvárásoknak megfelelően."
+			},
+			{
+				image: parkingImg,
+				title: "Saját parkolóhely",
+				text: "Felejtse el a parkolással járó stresszt! A helyszíni parkolónak köszönhetően autóját biztonságosan, az apartman közvetlen közelében hagyhatja."
+			}
+		]}
 	/>
 </Layout>
