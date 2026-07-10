@@ -1,0 +1,214 @@
+---
+import { Image } from 'astro:assets';
+
+interface Room {
+	id: string;
+	title: string;
+	image: ImageMetadata;
+	points: string;
+	path: string;
+}
+
+interface Props {
+	planImage: ImageMetadata;
+	buildingPath: string;
+	rooms: Room[];
+	placeholderText?: string;
+}
+
+const { planImage, buildingPath, rooms, placeholderText } = Astro.props;
+---
+
+<section class="room-plan fade-in-section">
+	<div class="room-plan-inner">
+		<div class="room-images">
+			<p class="room-placeholder">{placeholderText ?? 'Hover over a room to explore'}</p>
+			{rooms.map((room) => (
+				<div class="room-image-panel" data-room-panel={room.id}>
+					<Image src={room.image} alt={room.title} widths={[480, 800, 1200]} sizes="(max-width: 900px) 100vw, 50vw" format="webp" quality={80} />
+					<p class="room-caption">{room.title}</p>
+				</div>
+			))}
+		</div>
+
+		<div class="room-plan-svg-wrap">
+			<img src={planImage.src} alt="Floor plan" class="plan-base-image" />
+			<svg class="plan-overlay" viewBox={`0 0 ${planImage.width} ${planImage.height}`} preserveAspectRatio="xMidYMid meet" shape-rendering="geometricPrecision">
+				<path
+					class="outside-mask"
+					d={`M0,0 L${planImage.width},0 L${planImage.width},${planImage.height} L0,${planImage.height} Z ${buildingPath}`}
+					fill-rule="evenodd"
+					fill="white"
+				/>
+				{rooms.map((room) => (
+					<path
+						class="dim-cutout"
+						data-dim-for={room.id}
+						d={`${buildingPath} ${room.path}`}
+						fill-rule="evenodd"
+						fill="rgba(255,255,255,0.6)"
+						stroke="rgba(255,255,255,0.6)"
+						stroke-width="1.5"
+					/>
+				))}
+				{rooms.map((room) => (
+					<polygon
+						class="room-hotspot"
+						data-room={room.id}
+						points={room.points}
+						fill="transparent"
+					/>
+				))}
+			</svg>
+		</div>
+	</div>
+</section>
+
+<style>
+	.room-plan {
+		padding: 6rem 2rem;
+		max-width: 1300px;
+		margin: 0 auto;
+	}
+
+	.room-plan-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: center;
+	}
+
+	.room-images {
+		position: relative;
+		aspect-ratio: 4 / 3;
+		overflow: hidden;
+		border-radius: 4px;
+	}
+
+	.room-placeholder {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 2rem;
+		color: #999;
+		font-size: 1rem;
+		letter-spacing: 0.02em;
+		background: #f7f7f5;
+		transition: opacity 0.4s ease;
+	}
+
+	.room-images.has-selection .room-placeholder {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.room-image-panel {
+		position: absolute;
+		inset: 0;
+		opacity: 0;
+		transform: scale(0.92);
+		transition: opacity 0.7s ease, transform 0.9s ease;
+		pointer-events: none;
+	}
+
+	.room-image-panel.active {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.room-image-panel :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+	}
+
+	.room-caption {
+		position: absolute;
+		bottom: 1rem;
+		left: 1rem;
+		background: rgba(255, 255, 255, 0.9);
+		padding: 0.5rem 1rem;
+		font-size: 0.95rem;
+		letter-spacing: 0.02em;
+		border-radius: 2px;
+	}
+
+	.room-plan-svg-wrap {
+		position: relative;
+	}
+
+	.plan-base-image {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.plan-overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.dim-cutout {
+		opacity: 0;
+		transition: opacity 0.5s ease;
+		pointer-events: none;
+	}
+
+	.dim-cutout.active {
+		opacity: 1;
+	}
+
+	.room-hotspot {
+		cursor: pointer;
+	}
+
+	@media (max-width: 900px) {
+		.room-plan-inner {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
+<script>
+	const hotspots = document.querySelectorAll('.room-hotspot');
+	const cutouts = document.querySelectorAll('.dim-cutout');
+	const panels = document.querySelectorAll('.room-image-panel');
+	const imagesContainer = document.querySelector('.room-images');
+	const svgWrap = document.querySelector('.room-plan-svg-wrap');
+
+	function highlightRoom(roomId) {
+		cutouts.forEach((el) => el.classList.toggle('active', el.dataset.dimFor === roomId));
+	}
+
+	function showImage(roomId) {
+		panels.forEach((el) => el.classList.toggle('active', el.dataset.roomPanel === roomId));
+		if (imagesContainer) {
+			imagesContainer.classList.toggle('has-selection', !!roomId);
+		}
+	}
+
+	hotspots.forEach((hotspot) => {
+		const roomId = hotspot.dataset.room;
+		hotspot.addEventListener('mouseenter', () => {
+			highlightRoom(roomId);
+			showImage(roomId);
+		});
+		hotspot.addEventListener('click', () => {
+			highlightRoom(roomId);
+			showImage(roomId);
+		});
+	});
+
+	if (svgWrap) {
+		svgWrap.addEventListener('mouseleave', () => {
+			highlightRoom(null);
+		});
+	}
+</script>

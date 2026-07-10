@@ -9,6 +9,15 @@ import kitchenImg from '../assets/images/kitchen03.jpg';
 import netflixImg from '../assets/images/living04_Netflix.jpg';
 import parkingImg from '../assets/images/parking01.jpg';
 import Services from '../components/Services.astro';
+import RoomPlan from '../components/RoomPlan.astro';
+import planImage from '../assets/images/plan03.jpg';
+import bedroomMasterImg from '../assets/images/bedroom01.jpg';
+import bedroomSecondImg from '../assets/images/bedroom04.jpg';
+import livingRoomImg from '../assets/images/living01.jpg';
+import diningImg from '../assets/images/dining01.jpg';
+import hallImg from '../assets/images/central_hall_01.jpg';
+import bathroomImg from '../assets/images/bathroom01.jpg';
+import kitchenPlanImg from '../assets/images/kitchen01.jpg';
 ---
 
 <Layout
@@ -53,6 +62,61 @@ import Services from '../components/Services.astro';
 				image: parkingImg,
 				title: "Saját parkolóhely",
 				text: "Felejtse el a parkolással járó stresszt! A helyszíni parkolónak köszönhetően autóját biztonságosan, az apartman közvetlen közelében hagyhatja."
+			}
+		]}
+	/>
+	<RoomPlan
+		planImage={planImage}
+		buildingPath="M28,1341 L45,1158 L101,1148 L108,1030 L60,1017 L68,883 L120,874 L125,807 L81,772 L91,608 L129,600 L133,559 L96,511 L94,467 L501,359 L449,149 L921,36 L933,59 L963,63 L991,70 L1025,82 L1021,104 L1064,135 L1082,121 L1093,134 L1084,160 L1103,191 L1124,189 L1129,201 L1113,244 L1111,259 L1129,266 L1119,298 L1106,333 L1178,317 L1279,548 L1268,568 L1294,631 L1303,628 L1365,779 L1136,870 L1169,968 L1096,1015 L998,1051 L1003,1061 L1037,1076 L984,1094 L1001,1062 L995,1052 L713,1156 L718,1188 Z"
+		rooms={[
+			{
+				id: "bedroom-master",
+				title: "Háló",
+				image: bedroomMasterImg,
+				points: "32,1333,719,1181,602,620,83,748",
+				path: "M32,1333 L719,1181 L602,620 L83,748 Z"
+			},
+			{
+				id: "bedroom-second",
+				title: "Háló",
+				image: bedroomSecondImg,
+				points: "81,764,94,609,133,601,133,557,96,512,96,466,503,357,564,643",
+				path: "M81,764 L94,609 L133,601 L133,557 L96,512 L96,466 L503,357 L564,643 Z"
+			},
+			{
+				id: "living",
+				title: "Nappali",
+				image: livingRoomImg,
+				points: "535,503,449,145,922,35,934,57,983,67,1025,79,1023,101,1065,128,1082,113,1092,128,1085,155,1104,185,1121,185,1129,197,1109,251,1129,261,1119,296,1089,333,1092,348,937,402,912,520,557,611",
+				path: "M535,503 L449,145 L922,35 L934,57 L983,67 L1025,79 L1023,101 L1065,128 L1082,113 L1092,128 L1085,155 L1104,185 L1121,185 L1129,197 L1109,251 L1129,261 L1119,296 L1089,333 L1092,348 L937,402 L912,520 L557,611 Z"
+			},
+			{
+				id: "dining",
+				title: "Étkező",
+				image: diningImg,
+				points: "932,395,904,403,817,237,827,101,920,83,1004,99,1067,134,1100,189,1084,257,1074,284,1057,303,1001,328,919,356",
+				path: "M932,395 L904,403 L817,237 L827,101 L920,83 L1004,99 L1067,134 L1100,189 L1084,257 L1074,284 L1057,303 L1001,328 L919,356 Z"
+			},
+			{
+				id: "hall",
+				title: "Hall",
+				image: hallImg,
+				points: "601,878,548,634,562,628,523,496,969,380,1089,720,1022,741,1018,730,990,802,635,917",
+				path: "M601,878 L548,634 L562,628 L523,496 L969,380 L1089,720 L1022,741 L1018,730 L990,802 L635,917 Z"
+			},
+			{
+				id: "bathroom",
+				title: "Fürdőszoba",
+				image: bathroomImg,
+				points: "599,867,658,1153,924,1059,840,786",
+				path: "M599,867 L658,1153 L924,1059 L840,786 Z"
+			},
+			{
+				id: "kitchen",
+				title: "Konyha",
+				image: kitchenPlanImg,
+				points: "910,517,936,403,1190,343,1280,541,1266,562,1290,625,1304,622,1316,658,1024,750,996,802",
+				path: "M910,517 L936,403 L1190,343 L1280,541 L1266,562 L1290,625 L1304,622 L1316,658 L1024,750 L996,802 Z"
 			}
 		]}
 	/>
