@@ -4,6 +4,7 @@ import Hero from '../../components/Hero.astro';
 import Welcome from '../../components/Welcome.astro';
 import Services from '../../components/Services.astro';
 import RoomPlan from '../../components/RoomPlan.astro';
+import CityMap from '../../components/CityMap.astro';
 
 import heroImage from '../../assets/images/bedroom01.jpg';
 
@@ -21,6 +22,28 @@ import diningImg from '../../assets/images/dining01.jpg';
 import hallImg from '../../assets/images/central_hall_01.jpg';
 import bathroomImg from '../../assets/images/bathroom01.jpg';
 import kitchenPlanImg from '../../assets/images/kitchen01.jpg';
+
+import cityMapImage from '../../assets/images/city-map-blank.jpg';
+
+import iconApartman from '../../assets/images/icon-kastely-apartman.png';
+import iconMinaret from '../../assets/images/icon-minaret.png';
+import iconVar from '../../assets/images/icon-egri-var.png';
+import iconDobo from '../../assets/images/icon-dobo-ter.png';
+import iconErseki from '../../assets/images/icon-erseki-palota.png';
+import iconCsillag from '../../assets/images/icon-csillagvizsgalo.png';
+import iconBazilika from '../../assets/images/icon-egri-bazilika.png';
+import iconTermal from '../../assets/images/icon-termalfurdo.png';
+import iconSzepasszony from '../../assets/images/icon-szepasszony-volgy.png';
+
+import photoApartman from '../../assets/images/photo-kastely-apartman.jpg';
+import photoMinaret from '../../assets/images/photo-minaret.jpg';
+import photoVar from '../../assets/images/photo-egri-var.jpg';
+import photoDobo from '../../assets/images/photo-dobo-ter.jpg';
+import photoErseki from '../../assets/images/photo-erseki-palota.jpg';
+import photoCsillag from '../../assets/images/photo-csillagvizsgalo.jpg';
+import photoBazilika from '../../assets/images/photo-egri-bazilika.jpg';
+import photoTermal from '../../assets/images/photo-termalfurdo.jpg';
+import photoSzepasszony from '../../assets/images/photo-szepasszony-volgy.jpg';
 ---
 
 <Layout
@@ -124,6 +147,94 @@ import kitchenPlanImg from '../../assets/images/kitchen01.jpg';
 				image: kitchenPlanImg,
 				points: "910,517,936,403,1190,343,1280,541,1266,562,1290,625,1304,622,1316,658,1024,750,996,802",
 				path: "M910,517 L936,403 L1190,343 L1280,541 L1266,562 L1290,625 L1304,622 L1316,658 L1024,750 L996,802 Z"
+			}
+		]}
+	/>
+
+	<CityMap
+		mapImage={cityMapImage}
+		items={[
+			{
+				id: "apartman",
+				title: "Kastély Apartman – The perfect base for exploring Eger!",
+				text: "Despite its downtown location, the apartment is tucked away in a quiet, green corner. It is the ideal starting point to discover the secrets of the city, and the perfect place for quiet relaxation after a full day.",
+				icon: iconApartman,
+				photo: photoApartman,
+				left: 50.46,
+				top: 27.21,
+				isApartment: true
+			},
+			{
+				id: "dobo-ter",
+				title: "Dobó Square",
+				text: "Start your adventure in the bustling heart of Eger! Walking among the stunning Baroque buildings of this emblematic main square, the authentic historical atmosphere of the city will instantly captivate you.",
+				icon: iconDobo,
+				photo: photoDobo,
+				left: 64.42,
+				top: 46.35
+			},
+			{
+				id: "egri-var",
+				title: "Castle of Eger",
+				text: "Step into the realm of legends and explore one of Hungary's most popular and famous fortresses! The glorious past of the heroes of Eger and the wonderful panorama from the castle walls guarantee an unforgettable experience.",
+				icon: iconVar,
+				photo: photoVar,
+				left: 70.80,
+				top: 39.19
+			},
+			{
+				id: "erseki-palota",
+				title: "Archbishop's Palace",
+				text: "Let yourself be enchanted by one of the city center's most beautiful, valuable, and impressive architectural masterpieces. Inside the walls of this former high-clerical residence, you can catch a glimpse into the luxurious and mysterious everyday lives of the archbishops.",
+				icon: iconErseki,
+				photo: photoErseki,
+				left: 50.53,
+				top: 47.63
+			},
+			{
+				id: "egri-bazilika",
+				title: "Basilica of Eger",
+				text: "Admire the second-largest church in Hungary, a masterpiece of Neoclassical architecture. Its monumental interior and majestic organ are bound to leave you completely awestruck.",
+				icon: iconBazilika,
+				photo: photoBazilika,
+				left: 52.45,
+				top: 55.99
+			},
+			{
+				id: "minaret",
+				title: "Minaret",
+				text: "Discover a true global rarity: a unique Ottoman-era prayer tower topped with a Christian cross! If you are not afraid of the narrow stairs, the top offers an unparalleled, breathtaking view of the entire city center.",
+				icon: iconMinaret,
+				photo: photoMinaret,
+				left: 60.52,
+				top: 34.02
+			},
+			{
+				id: "szepasszony-volgy",
+				title: "Szépasszony Valley",
+				text: "When in Eger, wine is an absolute must, and this valley is the number one, most iconic spot for wine tasting in the city. Taste the famous Egri Bikavér (Bull's Blood) in the cozy wine cellars carved directly into the rhyolite tuff!",
+				icon: iconSzepasszony,
+				photo: photoSzepasszony,
+				left: 8.86,
+				top: 80.72
+			},
+			{
+				id: "csillagvizsgalo",
+				title: "Observatory",
+				text: "Discover the oldest operational camera obscura on the continent, allowing you to spy on the city in real-time! Located at the top of the Lyceum building, this center also offers breathtaking views and exciting scientific adventures.",
+				icon: iconCsillag,
+				photo: photoCsillag,
+				left: 61.66,
+				top: 54.64
+			},
+			{
+				id: "termalfurdo",
+				title: "Thermal Bath",
+				text: "Unwind in one of the country's most beautiful and greenest urban baths, set within a massive 5-hectare park! The 13 different pools and the healing thermal waters offer the perfect refreshment for the whole family after a day of sightseeing.",
+				icon: iconTermal,
+				photo: photoTermal,
+				left: 83.35,
+				top: 63.78
 			}
 		]}
 	/>

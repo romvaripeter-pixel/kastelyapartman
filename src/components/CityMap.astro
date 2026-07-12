@@ -1,0 +1,367 @@
+---
+import { Image } from 'astro:assets';
+
+interface MapItem {
+	id: string;
+	title: string;
+	text: string;
+	icon: ImageMetadata;
+	photo: ImageMetadata;
+	left: number;
+	top: number;
+	isApartment?: boolean;
+}
+
+interface Props {
+	mapImage: ImageMetadata;
+	items: MapItem[];
+}
+
+const { mapImage, items } = Astro.props;
+---
+
+<section class="city-map fade-in-section">
+	<div class="city-map-inner">
+		<div class="landmarks-grid-wrap">
+			<div class="landmarks-grid">
+				{items.map((item, i) => {
+					const row = Math.floor(i / 3);
+					const col = i % 3;
+					const originX = col === 0 ? '0%' : col === 1 ? '50%' : '100%';
+					const originY = row === 0 ? '0%' : row === 1 ? '50%' : '100%';
+					return (
+						<div
+							class="grid-thumb"
+							data-id={item.id}
+							data-title={item.title}
+							data-text={item.text}
+							style={`transform-origin: ${originX} ${originY}; transition-delay: ${i * 0.06}s`}
+						>
+							<Image src={item.photo} alt={item.title} widths={[400, 800, 1200]} sizes="(max-width: 900px) 100vw, 600px" format="webp" quality={85} />
+						</div>
+					);
+				})}
+			</div>
+
+			<div class="landmarks-caption">
+				<h3></h3>
+				<p></p>
+			</div>
+		</div>
+
+		<div class="map-wrap">
+			<Image src={mapImage} alt="City map" widths={[600, 900, 1200]} sizes="(max-width: 900px) 100vw, 50vw" format="webp" quality={85} class="map-base" />
+
+			{items.map((item, i) => (
+				<div
+					class={`map-icon-wrap ${item.isApartment ? 'apartment' : ''}`}
+					data-id={item.id}
+					data-title={item.title}
+					data-text={item.text}
+					style={`left:${item.left}%; top:${item.top}%; transition-delay:${i * 0.06}s`}
+				>
+					<div class="map-icon-scale">
+						<div class="map-icon-float">
+							<img src={item.icon.src} alt={item.title} class="map-icon-img" />
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.city-map {
+		padding: 6rem 2rem;
+		max-width: 1300px;
+		margin: 0 auto;
+	}
+
+	.city-map-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3rem;
+		align-items: start;
+	}
+
+	.landmarks-grid-wrap {
+		position: relative;
+	}
+
+	.landmarks-grid {
+		position: relative;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 0.6rem;
+		aspect-ratio: 1 / 1;
+		--grid-scale: 3;
+	}
+
+	.grid-thumb {
+		position: relative;
+		border-radius: 3px;
+		opacity: 0;
+		will-change: transform;
+		cursor: pointer;
+		z-index: 1;
+		transition: transform 0.35s ease-in, opacity 0.6s ease;
+	}
+
+	.grid-thumb.dropped {
+		opacity: 1;
+	}
+
+	.grid-thumb.active,
+	.grid-thumb.shrinking {
+		z-index: 20;
+	}
+
+	.grid-thumb.active {
+		transform: scale(var(--grid-scale));
+		transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
+	}
+
+	.grid-thumb :global(img) {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		display: block;
+		border-radius: 3px;
+		background: #f2f2f0;
+	}
+
+	.grid-thumb.active :global(img) {
+		object-fit: contain;
+	}
+
+	/* Space is always reserved — only opacity changes, so the page never shifts */
+	.landmarks-caption {
+		height: 9rem;
+		overflow: hidden;
+		padding: 1.4rem 0.2rem 0 0.2rem;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+
+	.landmarks-caption.visible {
+		opacity: 1;
+	}
+
+	.landmarks-caption h3 {
+		font-size: 1.15rem;
+		font-weight: 500;
+		margin: 0 0 0.5rem 0;
+	}
+
+	.landmarks-caption p {
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: #555;
+		margin: 0;
+	}
+
+	.map-wrap {
+		position: relative;
+	}
+
+	.map-wrap :global(.map-base) {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.map-icon-wrap {
+		position: absolute;
+		width: 12%;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+		cursor: pointer;
+		transition: opacity 0.6s ease;
+	}
+
+	.map-icon-wrap.dropped {
+		opacity: 1;
+	}
+
+	.map-icon-scale {
+		transition: transform 0.4s ease;
+	}
+
+	.map-icon-wrap.active .map-icon-scale {
+		transform: scale(1.3);
+	}
+
+	.map-icon-float {
+		animation: none;
+	}
+
+	.map-icon-wrap.apartment .map-icon-float {
+		animation: iconFloat 2.6s ease-in-out infinite;
+	}
+
+	.map-icon-wrap.active .map-icon-float {
+		animation: iconFloat 1.4s ease-in-out infinite;
+	}
+
+	.map-icon-img {
+		width: 100%;
+		height: auto;
+		display: block;
+		filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.25));
+	}
+
+	@keyframes iconFloat {
+		0%, 100% { transform: translateY(0); }
+		50% { transform: translateY(-8px); }
+	}
+
+	@media (max-width: 900px) {
+		.city-map-inner {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
+
+<script>
+	const grid = document.querySelector('.landmarks-grid');
+	const thumbs = document.querySelectorAll('.grid-thumb');
+	const mapIcons = document.querySelectorAll('.map-icon-wrap');
+	const captionEl = document.querySelector('.landmarks-caption');
+	const captionTitle = captionEl ? captionEl.querySelector('h3') : null;
+	const captionText = captionEl ? captionEl.querySelector('p') : null;
+	const cityMapSection = document.querySelector('.city-map');
+
+	function updateScale() {
+		if (!grid) return;
+		const firstThumb = grid.querySelector('.grid-thumb');
+		if (!firstThumb) return;
+		const gridRect = grid.getBoundingClientRect();
+		const thumbRect = firstThumb.getBoundingClientRect();
+		if (thumbRect.width > 0) {
+			const scale = gridRect.width / thumbRect.width;
+			grid.style.setProperty('--grid-scale', scale.toFixed(4));
+		}
+	}
+	window.addEventListener('load', updateScale);
+	window.addEventListener('resize', updateScale);
+	updateScale();
+
+	let activeId = null;
+	let pendingId = null;
+	let activeEl = null;
+	let isShrinking = false;
+
+	function setMapIconVisual(id) {
+		mapIcons.forEach((m) => m.classList.toggle('active', m.getAttribute('data-id') === id));
+	}
+
+	function showCaption(title, text) {
+		if (captionTitle) captionTitle.textContent = title;
+		if (captionText) captionText.textContent = text;
+		if (captionEl) captionEl.classList.add('visible');
+	}
+
+	function hideCaption() {
+		if (captionEl) captionEl.classList.remove('visible');
+	}
+
+	function growThumb(id, title, text) {
+		const el = grid ? grid.querySelector(`.grid-thumb[data-id="${id}"]`) : null;
+		if (!el) return;
+		activeId = id;
+		activeEl = el;
+		el.classList.add('active');
+
+		const onGrowEnd = (e) => {
+			if (e.propertyName !== 'transform') return;
+			el.removeEventListener('transitionend', onGrowEnd);
+			if (activeId === id) {
+				showCaption(title, text);
+			}
+		};
+		el.addEventListener('transitionend', onGrowEnd);
+	}
+
+	function startShrink() {
+		if (!activeEl || isShrinking) return;
+		isShrinking = true;
+		const el = activeEl;
+		el.classList.remove('active');
+		el.classList.add('shrinking');
+		hideCaption();
+
+		const onShrinkEnd = (e) => {
+			if (e.propertyName !== 'transform') return;
+			el.removeEventListener('transitionend', onShrinkEnd);
+			el.classList.remove('shrinking');
+			activeEl = null;
+			activeId = null;
+			isShrinking = false;
+			if (pendingId) {
+				const nextId = pendingId;
+				const nextEl = grid ? grid.querySelector(`.grid-thumb[data-id="${nextId}"]`) : null;
+				pendingId = null;
+				if (nextEl) {
+					growThumb(nextId, nextEl.getAttribute('data-title'), nextEl.getAttribute('data-text'));
+				}
+			}
+		};
+		el.addEventListener('transitionend', onShrinkEnd);
+	}
+
+	function request(id, title, text) {
+		setMapIconVisual(id);
+
+		if (id === activeId || id === pendingId) return;
+
+		if (activeId === null && !isShrinking) {
+			growThumb(id, title, text);
+		} else {
+			pendingId = id;
+			startShrink();
+		}
+	}
+
+	function requestClear() {
+		setMapIconVisual(null);
+		pendingId = null;
+		if (activeId !== null) {
+			startShrink();
+		}
+	}
+
+	thumbs.forEach((thumb) => {
+		const id = thumb.getAttribute('data-id');
+		const title = thumb.getAttribute('data-title');
+		const text = thumb.getAttribute('data-text');
+		thumb.addEventListener('mouseenter', () => request(id, title, text));
+		thumb.addEventListener('click', () => request(id, title, text));
+	});
+
+	mapIcons.forEach((icon) => {
+		const id = icon.getAttribute('data-id');
+		const title = icon.getAttribute('data-title');
+		const text = icon.getAttribute('data-text');
+		icon.addEventListener('mouseenter', () => request(id, title, text));
+		icon.addEventListener('click', () => request(id, title, text));
+	});
+
+	if (cityMapSection) {
+		cityMapSection.addEventListener('mouseleave', requestClear);
+	}
+
+	const dropTargets = document.querySelectorAll('.grid-thumb, .map-icon-wrap');
+	const dropObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('dropped');
+					dropObserver.unobserve(entry.target);
+				}
+			});
+		},
+		{ threshold: 0.2 }
+	);
+	dropTargets.forEach((el) => dropObserver.observe(el));
+</script>

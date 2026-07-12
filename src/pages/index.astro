@@ -18,6 +18,29 @@ import diningImg from '../assets/images/dining01.jpg';
 import hallImg from '../assets/images/central_hall_01.jpg';
 import bathroomImg from '../assets/images/bathroom01.jpg';
 import kitchenPlanImg from '../assets/images/kitchen01.jpg';
+
+import CityMap from '../components/CityMap.astro';
+import cityMapImage from '../assets/images/city-map-blank.jpg';
+
+import iconApartman from '../assets/images/icon-kastely-apartman.png';
+import iconMinaret from '../assets/images/icon-minaret.png';
+import iconVar from '../assets/images/icon-egri-var.png';
+import iconDobo from '../assets/images/icon-dobo-ter.png';
+import iconErseki from '../assets/images/icon-erseki-palota.png';
+import iconCsillag from '../assets/images/icon-csillagvizsgalo.png';
+import iconBazilika from '../assets/images/icon-egri-bazilika.png';
+import iconTermal from '../assets/images/icon-termalfurdo.png';
+import iconSzepasszony from '../assets/images/icon-szepasszony-volgy.png';
+
+import photoApartman from '../assets/images/photo-kastely-apartman.jpg';
+import photoMinaret from '../assets/images/photo-minaret.jpg';
+import photoVar from '../assets/images/photo-egri-var.jpg';
+import photoDobo from '../assets/images/photo-dobo-ter.jpg';
+import photoErseki from '../assets/images/photo-erseki-palota.jpg';
+import photoCsillag from '../assets/images/photo-csillagvizsgalo.jpg';
+import photoBazilika from '../assets/images/photo-egri-bazilika.jpg';
+import photoTermal from '../assets/images/photo-termalfurdo.jpg';
+import photoSzepasszony from '../assets/images/photo-szepasszony-volgy.jpg';
 ---
 
 <Layout
@@ -117,6 +140,93 @@ import kitchenPlanImg from '../assets/images/kitchen01.jpg';
 				image: kitchenPlanImg,
 				points: "910,517,936,403,1190,343,1280,541,1266,562,1290,625,1304,622,1316,658,1024,750,996,802",
 				path: "M910,517 L936,403 L1190,343 L1280,541 L1266,562 L1290,625 L1304,622 L1316,658 L1024,750 L996,802 Z"
+			}
+		]}
+	/>
+	<CityMap
+		mapImage={cityMapImage}
+		items={[
+			{
+				id: "apartman",
+				title: "Kastély Apartman – A tökéletes bázis Eger felfedezéséhez!",
+				text: "Belvárosi elhelyezkedése ellenére az apartman egy csendes, zöld sarokban bújik meg. Ideális kiindulópont a város titkainak megismeréséhez, egy tartalmas nap után pedig tökéletes helyszín a csendes relaxálásra.",
+				icon: iconApartman,
+				photo: photoApartman,
+				left: 50.46,
+				top: 27.21,
+				isApartment: true
+			},
+			{
+				id: "dobo-ter",
+				title: "Dobó István tér",
+				text: "Indítsd az egri kalandot a város pezsgő szívében! Ezen az emblematikus főtéren a lenyűgöző barokk épületek között sétálva azonnal magával ragad majd a hely hamisítatlan, történelmi hangulata.",
+				icon: iconDobo,
+				photo: photoDobo,
+				left: 64.42,
+				top: 46.35
+			},
+			{
+				id: "egri-var",
+				title: "Egri vár",
+				text: "Lépj be a legendák birodalmába, és járd be Magyarország egyik legnépszerűbb és leghíresebb erődítményét! Az egri hősök dicső múltja és a falakról nyíló csodás panoráma garantáltan felejthetetlen élménnyé teszi a látogatást.",
+				icon: iconVar,
+				photo: photoVar,
+				left: 70.80,
+				top: 39.19
+			},
+			{
+				id: "erseki-palota",
+				title: "Egri Érseki Palota",
+				text: "Engedd, hogy elvarázsoljon a belváros egyik legszebb, legértékesebb és legimpozánsabb építészeti remekműve. Az egykori főpapi rezidencia falai között bepillantást nyerhetsz az érsekek fényűző és titokzatos hétköznapjaiba.",
+				icon: iconErseki,
+				photo: photoErseki,
+				left: 50.53,
+				top: 47.63
+			},
+			{
+				id: "egri-bazilika",
+				title: "Egri Bazilika",
+				text: "Csodáld meg Magyarország második legnagyobb templomát, amely a klasszicista művészet egyik legkiemelkedőbb hazai alkotása. Monumentális belső tere és fenséges orgonája téged is egészen biztosan le fog nyűgözni.",
+				icon: iconBazilika,
+				photo: photoBazilika,
+				left: 52.45,
+				top: 55.99
+			},
+			{
+				id: "minaret",
+				title: "Minaret",
+				text: "Tekints meg egy igazi világkülönlegességet, a keresztény kereszttel büszkélkedő török kori imatornyot! Ha nem ijedsz meg a szűk lépcsőfokoktól, a tetejéről páratlan kilátás nyílik az egész belvárosra.",
+				icon: iconMinaret,
+				photo: photoMinaret,
+				left: 60.52,
+				top: 34.02
+			},
+			{
+				id: "szepasszony-volgy",
+				title: "Szépasszony-völgy",
+				text: "Ha Eger, akkor a bor sem maradhat ki: ez a völgy a borkóstolás abszolút első számú és legikonikusabb helyszíne a városban. Kóstolj bele a híres Egri Bikavérbe a hangulatos, riolittufába vájt pincerendszerek rejtekében!",
+				icon: iconSzepasszony,
+				photo: photoSzepasszony,
+				left: 8.86,
+				top: 80.72
+			},
+			{
+				id: "csillagvizsgalo",
+				title: "Csillagvizsgáló és Tudományos Élményközpont",
+				text: "Fedezd fel a kontinens legrégebbi, máig működő camera obscura eszközét, amellyel élőben kémlelheted a várost! A Líceum tetején található központ ráadásul lélegzetelállító panorámát és izgalmas tudományos kalandokat tartogat.",
+				icon: iconCsillag,
+				photo: photoCsillag,
+				left: 61.66,
+				top: 54.64
+			},
+			{
+				id: "termalfurdo",
+				title: "Termálfürdő",
+				text: "Kapcsolódj ki az ország egyik legszebb és legzöldebb városi strandján, egy hatalmas, 5 hektáros parkban! A 13 különböző medence és a gyógyító termálvíz tökéletes felfrissülést nyújt az egész családnak a városnézés után.",
+				icon: iconTermal,
+				photo: photoTermal,
+				left: 83.35,
+				top: 63.78
 			}
 		]}
 	/>
