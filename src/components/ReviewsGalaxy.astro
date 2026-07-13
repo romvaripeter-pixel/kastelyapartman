@@ -1,0 +1,319 @@
+---
+interface Review {
+	id: string;
+	snippet: string;
+	fullText: string;
+	guestName: string;
+	source: 'airbnb' | 'booking';
+	x: number;
+	y: number;
+	depth: number;
+}
+
+interface Props {
+	headline: string;
+	reviews: Review[];
+	ambientWords?: string[];
+	airbnbLogo?: ImageMetadata;
+	bookingLogo?: ImageMetadata;
+}
+
+const { headline, reviews, ambientWords = [], airbnbLogo, bookingLogo } = Astro.props;
+
+const goldenAngle = 137.508;
+const ambientPositions = ambientWords.map((word, i) => {
+	const angle = i * goldenAngle * (Math.PI / 180);
+	const radius = 20 + (i % 5) * 13;
+	const x = 50 + Math.cos(angle) * radius * 0.95;
+	const y = 50 + Math.sin(angle) * radius * 0.75;
+	const depth = 0.15 + ((i * 37) % 40) / 100;
+	return {
+		word,
+		x: Math.min(94, Math.max(6, x)),
+		y: Math.min(90, Math.max(10, y)),
+		depth,
+	};
+});
+---
+
+<section class="reviews-galaxy fade-in-section">
+	<div class="galaxy-canvas" id="galaxy-canvas">
+		<h2 class="galaxy-headline">{headline}</h2>
+
+		{ambientPositions.map((a, i) => (
+			<div class="ambient-word" style={`left:${a.x}%; top:${a.y}%; --depth:${a.depth}; transition-delay:${i * 0.05}s`}>
+				<span
+					class="ambient-drift"
+					style={`animation-duration:${7 + (i % 5)}s; animation-delay:${(i % 4) * -1.3}s`}
+				>
+					{a.word}
+				</span>
+			</div>
+		))}
+
+		{reviews.map((review, i) => (
+			<div
+				class="star"
+				data-id={review.id}
+				style={`left:${review.x}%; top:${review.y}%; --depth:${review.depth}; transition-delay:${i * 0.08}s`}
+			>
+				<div class="star-drift" style={`animation-duration:${9 + i}s; animation-delay:${i * -1.7}s`}>
+					<div class="star-snippet">{review.snippet}</div>
+
+					<div class="star-card">
+						<div class="star-card-arrow"></div>
+						<p class="star-card-text">{review.fullText}</p>
+						<div class="star-card-footer">
+							<span class="star-card-name">{review.guestName}</span>
+							{review.source === 'airbnb' && airbnbLogo && (
+								<img src={airbnbLogo.src} alt="Airbnb" class="star-card-logo" />
+							)}
+							{review.source === 'booking' && bookingLogo && (
+								<img src={bookingLogo.src} alt="Booking.com" class="star-card-logo" />
+							)}
+						</div>
+					</div>
+				</div>
+			</div>
+		))}
+	</div>
+</section>
+
+<style>
+	.reviews-galaxy {
+		padding: 7rem 2rem;
+		background: #ffffff;
+	}
+
+	.galaxy-canvas {
+		position: relative;
+		max-width: 1100px;
+		margin: 0 auto;
+		min-height: 60vh;
+		overflow: visible;
+	}
+
+	.galaxy-headline {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		max-width: 480px;
+		text-align: center;
+		font-size: clamp(1.28rem, 2.4vw, 1.92rem);
+		font-weight: 400;
+		color: #3a352f;
+		line-height: 1.45;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+	.ambient-word,
+	.star {
+		position: absolute;
+		transform: translate(-50%, -50%);
+		opacity: 0;
+		transition: opacity 0.8s ease, transform 0.4s ease-out;
+	}
+
+	.ambient-word {
+		z-index: 2;
+	}
+
+	.ambient-word.dropped,
+	.star.dropped {
+		opacity: 1;
+	}
+
+	.ambient-drift {
+		display: inline-block;
+		font-family: Georgia, serif;
+		font-style: italic;
+		color: #6b6259;
+		opacity: calc(0.15 + var(--depth) * 0.6);
+		font-size: calc(0.6rem + var(--depth) * 0.4rem);
+		filter: blur(calc((1 - var(--depth)) * 1.5px));
+		animation-name: driftSmall;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: infinite;
+		white-space: nowrap;
+	}
+
+	@keyframes driftSmall {
+		0%, 100% { transform: translate(0, 0); }
+		50% { transform: translate(6px, -8px); }
+	}
+
+	.star {
+		z-index: 5;
+		cursor: pointer;
+	}
+
+	.star:hover,
+	.star.card-open {
+		z-index: 100;
+	}
+
+	.star-drift {
+		display: inline-block;
+		position: relative;
+		animation-name: driftBig;
+		animation-timing-function: ease-in-out;
+		animation-iteration-count: infinite;
+	}
+
+    .star:hover .star-drift,
+	.star.card-open .star-drift {
+		animation-play-state: paused;
+	}
+
+	@keyframes driftBig {
+		0%, 100% { transform: translate(0, 0); }
+		50% { transform: translate(10px, -12px); }
+	}
+
+	.star-snippet {
+		font-family: Georgia, serif;
+		font-style: italic;
+		white-space: nowrap;
+		color: #3a352f;
+		opacity: calc(0.15 + var(--depth) * 0.85);
+		font-size: calc(0.5rem + var(--depth) * 0.4rem);
+		filter: blur(calc((1 - var(--depth)) * 0.6px));
+		text-shadow:
+			0 0 calc(3px + var(--depth) * 8px) rgba(214, 178, 110, calc(0.55 + var(--depth) * 0.45)),
+			0 0 calc(10px + var(--depth) * 24px) rgba(214, 178, 110, calc(0.3 + var(--depth) * 0.4));
+		transition: opacity 0.4s ease, transform 0.4s ease;
+	}
+
+	.star:hover .star-snippet {
+		opacity: 1;
+		transform: scale(1.06);
+	}
+
+	.star-card {
+		position: absolute;
+		bottom: calc(100% + 18px);
+		left: 50%;
+		transform: translateX(-50%) translateY(8px) scale(0.92);
+		width: 280px;
+		background: #fffdf9;
+		border-radius: 6px;
+		padding: 1.2rem 1.3rem;
+		box-shadow: 0 12px 40px rgba(120, 100, 70, 0.18), 0 0 0 1px rgba(235, 220, 190, 0.4);
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.4s ease, transform 0.4s ease;
+		z-index: 10;
+	}
+
+	.star-card-arrow {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 0;
+		height: 0;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-top: 8px solid #fffdf9;
+	}
+
+	.star:hover .star-card,
+	.star.card-open .star-card {
+		opacity: 1;
+		transform: translateX(-50%) translateY(0) scale(1);
+		pointer-events: auto;
+	}
+
+	.star-card-text {
+		font-size: 0.9rem;
+		line-height: 1.6;
+		color: #4a453e;
+		margin: 0 0 0.8rem 0;
+	}
+
+	.star-card-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.star-card-name {
+		font-size: 0.85rem;
+		font-weight: 500;
+		color: #3a352f;
+	}
+
+	.star-card-logo {
+		height: 18px;
+		width: auto;
+	}
+
+	@media (max-width: 700px) {
+		.galaxy-canvas {
+			min-height: 70vh;
+		}
+
+		.star-card {
+			width: 220px;
+		}
+	}
+</style>
+
+<script>
+	const canvas = document.getElementById('galaxy-canvas');
+	const floaters = document.querySelectorAll('.star, .ambient-word');
+	const stars = document.querySelectorAll('.star');
+
+	function applyParallax(clientX, clientY) {
+		if (!canvas) return;
+		const rect = canvas.getBoundingClientRect();
+		const relX = (clientX - rect.left) / rect.width - 0.5;
+		const relY = (clientY - rect.top) / rect.height - 0.5;
+		floaters.forEach((el) => {
+			if (el.classList.contains('star') && (el.matches(':hover') || el.classList.contains('card-open'))) {
+				return; // frozen while selected — keeps it steady and easy to read
+			}
+			const depth = parseFloat(getComputedStyle(el).getPropertyValue('--depth')) || 0.3;
+			const strength = 18 * depth;
+			const px = -relX * strength;
+			const py = -relY * strength;
+			el.style.transform = `translate(calc(-50% + ${px}px), calc(-50% + ${py}px))`;
+		});
+	}
+
+	if (canvas) {
+		canvas.addEventListener('mousemove', (e) => applyParallax(e.clientX, e.clientY));
+		canvas.addEventListener('mouseleave', () => {
+			floaters.forEach((el) => {
+				el.style.transform = 'translate(-50%, -50%)';
+			});
+		});
+	}
+
+	stars.forEach((star) => {
+		star.addEventListener('click', (e) => {
+			e.stopPropagation();
+			const isOpen = star.classList.contains('card-open');
+			stars.forEach((s) => s.classList.remove('card-open'));
+			if (!isOpen) star.classList.add('card-open');
+		});
+	});
+	document.addEventListener('click', () => {
+		stars.forEach((s) => s.classList.remove('card-open'));
+	});
+
+	const dropObserver = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting) {
+					entry.target.classList.add('dropped');
+					dropObserver.unobserve(entry.target);
+				}
+			});
+		},
+		{ threshold: 0.15 }
+	);
+	document.querySelectorAll('.star, .ambient-word').forEach((el) => dropObserver.observe(el));
+</script>

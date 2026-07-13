@@ -44,6 +44,10 @@ import photoCsillag from '../../assets/images/photo-csillagvizsgalo.jpg';
 import photoBazilika from '../../assets/images/photo-egri-bazilika.jpg';
 import photoTermal from '../../assets/images/photo-termalfurdo.jpg';
 import photoSzepasszony from '../../assets/images/photo-szepasszony-volgy.jpg';
+
+import ReviewsGalaxy from '../../components/ReviewsGalaxy.astro';
+import airbnbLogo from '../../assets/images/logo-airbnb.svg';
+import bookingLogo from '../../assets/images/logo-booking.svg';
 ---
 
 <Layout
@@ -148,6 +152,28 @@ import photoSzepasszony from '../../assets/images/photo-szepasszony-volgy.jpg';
 				points: "910,517,936,403,1190,343,1280,541,1266,562,1290,625,1304,622,1316,658,1024,750,996,802",
 				path: "M910,517 L936,403 L1190,343 L1280,541 L1266,562 L1290,625 L1304,622 L1316,658 L1024,750 L996,802 Z"
 			}
+		]}
+	/>
+
+	<ReviewsGalaxy
+		headline="Our history is written by countless unforgettable moments."
+		airbnbLogo={airbnbLogo}
+		bookingLogo={bookingLogo}
+		reviews={[
+			{ id: "rodrigo", snippet: "Wonderful place", fullText: "Wonderful place. Very nicely decorated. Elegant furniture and sleek kitchen appliances. High ceilings, noble feeling, especially in the main bedroom. Very clean. Perfect location. Friendly host, convenient garage, welcoming neighbours, spacious rooms and excellent Sonos sound system. Highly recommended.", guestName: "Rodrigo", source: "airbnb", x: 82.8, y: 50.0, depth: 0.30 },
+			{ id: "michal", snippet: "Above and beyond", fullText: "A luxurious and very indulgent apartment, renovated and decorative. Easy and detailed arrival provided by Joli. The place is above and beyond. Clean, spacious and thoughtfully equipped. I would definitely come back.", guestName: "Michal", source: "airbnb", x: 30.0, y: 71.9, depth: 0.83 },
+			{ id: "michael-2", snippet: "High-end elegance", fullText: "Peter and Jola were excellent hosts during our stay. The property was high-end elegance with refined and sophisticated interiors. I wondered when the butler was going to walk through to the sitting area.", guestName: "Michael", source: "airbnb", x: 54.5, y: 35.0, depth: 0.66 },
+			{ id: "sara", snippet: "Even more beautiful in real life", fullText: "We were super happy with the stay! It's even more beautiful in real life, with plenty of space and everything you need. I highly recommend it for your next visit to Eger.", guestName: "Sara", source: "airbnb", x: 84.3, y: 82.1, depth: 0.49 },
+			{ id: "george", snippet: "Close to the centre, yet no traffic noise", fullText: "Beautiful, very tastefully refurbished apartment, very spacious. Excellent sound insulation, close to the city centre, yet virtually no traffic noise. Highly recommended.", guestName: "George", source: "airbnb", x: 10.0, y: 41.4, depth: 0.32 },
+			{ id: "martina", snippet: "Fantastic", fullText: "Everything was fantastic, the apartment was beautiful and demanding in every way. Equipped with everything, perfect for 6 people. Jola was very helpful and responded immediately.", guestName: "Martina", source: "airbnb", x: 90.0, y: 24.8, depth: 0.85 },
+			{ id: "eniko", snippet: "Just like a five-star hotel", fullText: "It was a beautiful apartment, just like a five-star hotel suite. Everything is exactly as in the pictures. Spacious, cosy, beautiful and tasteful. We had a great time and would definitely recommend it.", guestName: "Enikő", source: "airbnb", x: 39, y: 85.0, depth: 0.35 },
+			{ id: "yunjin", snippet: "I've never experienced anything like this", fullText: "I've stayed at countless Airbnbs, but wow — I've never experienced anything like this. The apartment was so amazing that I cancelled my evening plans to stay in, cook and relax. Spacious, beautiful and perfectly equipped. Absolutely the best.", guestName: "Yunjin", source: "airbnb", x: 28.7, y: 20.6, depth: 1.00 },
+			{ id: "ferenc", snippet: "Great location", fullText: "Very clean, well-equipped, spacious apartment, exactly as in the pictures, great location. Impeccable! We had 3 kids with us, they loved it too. A perfect ten.", guestName: "Ferenc", source: "booking", x: 90, y: 61.8, depth: 0.34 },
+			{ id: "jagoda", snippet: "Peaceful and relaxing atmosphere", fullText: "Awesome! Kastély Apartman is a very pleasant, well-kept and comfortable place to stay. Clean, beautifully decorated and well equipped. The atmosphere is peaceful and relaxing. The owner's honesty and kindness deserve special praise.", guestName: "Jagoda", source: "booking", x: 10.0, y: 65.8, depth: 0.87 },
+			{ id: "zoltan", snippet: "Absolutely splendid", fullText: "Absolutely splendid. 500 metres from the city centre and 600 metres from the castle. Very quiet location, huge rooms, tasteful furnishings, private parking and impeccable cleanliness.", guestName: "Zoltán", source: "booking", x: 75.0, y: 18.0, depth: 0.70 },
+			{ id: "magdalena", snippet: "Feel like a queen", fullText: "In this apartment you can feel like a queen. Fantastic, spacious apartment with a stylish interior. Excellent contact with the owner and secure parking included.", guestName: "Magdalena", source: "booking", x: 71.5, y: 90.0, depth: 0.53 },
+			{ id: "imre", snippet: "Fantastic atmosphere", fullText: "The atmosphere of the apartment is fantastic, as if you were stepping into the early 20th century, yet with all modern comforts. Very good location in the city centre and an extremely kind, helpful host.", guestName: "Imre", source: "booking", x: 30.0, y: 37.1, depth: 0.36 },
+			{ id: "krisztina", snippet: "Feels like staying in a castle", fullText: "One of the nicest apartments we have ever stayed in. It feels like staying in a castle. Beautiful furniture, attention to detail, a well-equipped kitchen and a great location close to the city centre.", guestName: "Krisztina", source: "booking", x: 90.0, y: 35.0, depth: 0.89 }
 		]}
 	/>
 
