@@ -45,6 +45,11 @@ import photoSzepasszony from '../assets/images/photo-szepasszony-volgy.jpg';
 import ReviewsGalaxy from '../components/ReviewsGalaxy.astro';
 import airbnbLogo from '../assets/images/logo-airbnb.svg';
 import bookingLogo from '../assets/images/logo-booking.svg';
+
+import Contact from '../components/Contact.astro';
+import logoSzallas from '../assets/images/logo-szallas.svg';
+import airbnbLogoFull from '../assets/images/logo-airbnb-full.svg';
+import bookingLogoFull from '../assets/images/logo-booking-full.svg';
 ---
 
 <Layout
@@ -147,7 +152,8 @@ import bookingLogo from '../assets/images/logo-booking.svg';
 			}
 		]}
 	/>
-<ReviewsGalaxy
+
+	<ReviewsGalaxy
 		headline="Számtalan emlék, egyetlen közös történet."
 		airbnbLogo={airbnbLogo}
 		bookingLogo={bookingLogo}
@@ -253,6 +259,19 @@ import bookingLogo from '../assets/images/logo-booking.svg';
 				left: 83.35,
 				top: 63.78
 			}
+		]}
+	/>
+	<Contact
+		heading="Kapcsolat"
+		intro="Ha foglalni szeretne, vagy kérdése van, várjuk emailjét, vagy hívjon bizalommal!"
+		address="Tűzoltó tér, Eger, Hungary"
+		email="romvari.peter@gmail.com"
+		phone="+36 30 638 7740"
+		phoneName="Vincze Jolán"
+		links={[
+			{ name: "Airbnb", href: "https://airbnb.com/h/kastelyapartman", logo: airbnbLogoFull },
+			{ name: "Booking.com", href: "https://www.booking.com/hotel/hu/kastely-apartman-eger.hu.html", logo: bookingLogo },
+			{ name: "Szállás.hu", href: "https://szallas.hu/kastely-apartman-eger", logo: logoSzallas }
 		]}
 	/>
 </Layout>

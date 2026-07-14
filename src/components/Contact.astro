@@ -1,0 +1,164 @@
+---
+interface PlatformLink {
+	name: string;
+	href: string;
+	logo: ImageMetadata;
+}
+
+interface Props {
+	heading: string;
+	intro: string;
+	address: string;
+	email: string;
+	phone: string;
+	phoneName: string;
+	links: PlatformLink[];
+}
+
+const { heading, intro, address, email, phone, phoneName, links } = Astro.props;
+---
+
+<section class="contact fade-in-section">
+	<div class="contact-inner">
+		<h2>{heading}</h2>
+		<p class="contact-intro">{intro}</p>
+
+		<div class="contact-details">
+			<div class="contact-row">
+				<svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<path d="M12 21s-7-6.5-7-11.5a7 7 0 1 1 14 0C19 14.5 12 21 12 21z" />
+					<circle cx="12" cy="9.5" r="2.5" />
+				</svg>
+				<span>{address}</span>
+			</div>
+
+			<div class="contact-row">
+				<svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<rect x="3" y="5" width="18" height="14" rx="1.5" />
+					<path d="M3.5 6.5 12 13l8.5-6.5" />
+				</svg>
+				<a href={`mailto:${email}`}>{email}</a>
+			</div>
+
+			<div class="contact-row">
+				<svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+					<path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 1-2z" />
+				</svg>
+				<a href={`tel:${phone.replace(/\s+/g, '')}`}>{phone}</a>
+				<span class="contact-name">— {phoneName}</span>
+			</div>
+		</div>
+
+		<div class="contact-divider"></div>
+
+		<div class="contact-logos">
+			{links.map((link) => (
+				<a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.name}>
+					<img src={link.logo.src} alt={link.name} />
+				</a>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.contact {
+		padding: 6rem 2rem 5rem 2rem;
+        background: #f5f4f2;
+	}
+
+	.contact-inner {
+		max-width: 560px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.contact h2 {
+		font-size: clamp(1.5rem, 2.6vw, 2rem);
+		font-weight: 400;
+		margin: 0 0 1rem 0;
+	}
+
+	.contact-intro {
+		font-size: 1rem;
+		line-height: 1.7;
+		color: #555;
+		margin: 0 0 2.8rem 0;
+	}
+
+	.contact-details {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 0.9rem;
+	}
+
+	.contact-row {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+		font-size: 0.98rem;
+		color: #3a352f;
+	}
+
+	.contact-row a {
+		color: #3a352f;
+		text-decoration: none;
+		border-bottom: 1px solid transparent;
+		transition: border-color 0.3s ease;
+	}
+
+	.contact-row a:hover {
+		border-bottom-color: #3a352f;
+	}
+
+	.contact-name {
+		color: #777;
+	}
+
+	.contact-icon {
+		width: 17px;
+		height: 17px;
+		flex-shrink: 0;
+		color: #9a9187;
+	}
+
+	.contact-divider {
+		width: 40px;
+		height: 1px;
+		background: #ddd;
+		margin: 2.6rem auto;
+	}
+
+	.contact-logos {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 2.2rem;
+		flex-wrap: wrap;
+	}
+
+	.contact-logos a {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.contact-logos img {
+		height: 20px;
+		width: auto;
+		filter: grayscale(1) opacity(0.55);
+		transition: filter 0.35s ease;
+	}
+
+	.contact-logos a:hover img {
+		filter: grayscale(0) opacity(1);
+	}
+
+	@media (max-width: 500px) {
+		.contact-row {
+			flex-direction: column;
+			gap: 0.2rem;
+			text-align: center;
+		}
+	}
+</style>

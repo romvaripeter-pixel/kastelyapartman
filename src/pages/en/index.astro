@@ -48,6 +48,11 @@ import photoSzepasszony from '../../assets/images/photo-szepasszony-volgy.jpg';
 import ReviewsGalaxy from '../../components/ReviewsGalaxy.astro';
 import airbnbLogo from '../../assets/images/logo-airbnb.svg';
 import bookingLogo from '../../assets/images/logo-booking.svg';
+
+import Contact from '../../components/Contact.astro';
+import logoSzallas from '../../assets/images/logo-szallas.svg';
+import airbnbLogoFull from '../../assets/images/logo-airbnb-full.svg';
+import bookingLogoFull from '../../assets/images/logo-booking-full.svg';
 ---
 
 <Layout
@@ -262,6 +267,20 @@ import bookingLogo from '../../assets/images/logo-booking.svg';
 				left: 83.35,
 				top: 63.78
 			}
+		]}
+	/>
+
+	<Contact
+		heading="Contact"
+		intro="If you want to make a reservation or have any questions, we are waiting for your email or feel free to call us!"
+		address="Tűzoltó square, Eger, Hungary"
+		email="romvari.peter@gmail.com"
+		phone="+36 30 638 7740"
+		phoneName="Jolán Vincze"
+		links={[
+			{ name: "Airbnb", href: "https://airbnb.com/h/kastelyapartman", logo: airbnbLogoFull },
+			{ name: "Booking.com", href: "https://www.booking.com/hotel/hu/kastely-apartman-eger.hu.html", logo: bookingLogoFull },
+			{ name: "Szállás.hu", href: "https://szallas.hu/kastely-apartman-eger", logo: logoSzallas }
 		]}
 	/>
 </Layout>
