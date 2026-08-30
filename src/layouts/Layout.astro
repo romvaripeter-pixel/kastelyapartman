@@ -1,38 +1,56 @@
 ---
+import navLogo from '../assets/images/KASTELY_LOGO.png';
+
 interface Props {
-    title: string;
-    description: string;
-    lang: string;
+	title: string;
+	description: string;
+	lang: string;
 }
 
 const { title, description, lang } = Astro.props;
+
+const homeHref = lang === 'hu' ? '/' : '/en/';
+const otherLangHref = lang === 'hu' ? '/en/' : '/';
+const contactLabel = lang === 'hu' ? 'Kapcsolat' : 'Contact';
 ---
 
 <html lang={lang}>
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>{title}</title>
-        <meta name="description" content={description} />
-    </head>
-    <body>
-        <header class="site-header">
-            <nav>
-                <a href="/" class="logo">Kastély Apartman</a>
-            </nav>
-        </header>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+	</head>
+	<body>
+		<nav class="site-band" id="site-band">
+			<a href="#contact" class="band-contact">{contactLabel}</a>
+			<a href={homeHref} class="band-logo-link">
+				<img src={navLogo.src} alt="Kastély Apartman" class="band-logo" />
+			</a>
+			<div class="band-lang">
+				<a href="/" class:list={[lang === 'hu' && 'active']}>HU</a>
+				<span>/</span>
+				<a href="/en/" class:list={[lang === 'en' && 'active']}>EN</a>
+			</div>
+		</nav>
 
-        <main>
-            <slot />
-        </main>
+		<main>
+			<slot />
+		</main>
 
-        <footer>
-            <p>&copy; {new Date().getFullYear()} Kastély Apartman</p>
-        </footer>
+		<footer>
+			<p>&copy; {new Date().getFullYear()} Kastély Apartman</p>
+		</footer>
+
 		<script>
 			const sections = document.querySelectorAll('.fade-in-section');
-
 			const observer = new IntersectionObserver(
 				(entries) => {
 					entries.forEach((entry) => {
@@ -44,53 +62,122 @@ const { title, description, lang } = Astro.props;
 				},
 				{ threshold: 0.15 }
 			);
-
 			sections.forEach((section) => observer.observe(section));
+
+			const band = document.getElementById('site-band');
+			const BAND_THRESHOLD = 40;
+			function updateBand() {
+				if (band) {
+					band.classList.toggle('visible', window.scrollY > BAND_THRESHOLD);
+				}
+			}
+			window.addEventListener('scroll', updateBand, { passive: true });
+			updateBand();
 		</script>
-    </body>
+	</body>
 </html>
 
 <style>
-	:global(body) {
-		margin: 0;
-		font-family: system-ui, sans-serif;
+	:global(html) {
+		scroll-behavior: smooth;
 	}
 
-	.site-header {
-		position: absolute;
+	:global(html) {
+		--font-serif: 'Newsreader', Georgia, serif;
+		--font-sans: 'Inter', system-ui, sans-serif;
+	}
+
+	:global(body) {
+		margin: 0;
+		font-family: var(--font-sans);
+		background: #ffffff;
+	}
+
+	main {
+		padding: 0;
+	}
+
+	.site-band {
+		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index: 10;
-		padding: 1.5rem 2rem;
-	}
-
-    .logo {
-        color: white;
-        text-decoration: none;
-        font-size: 1.1rem;
-        letter-spacing: 0.05em;
-    }
-
-    main {
-        padding: 0;
-    }
-
-    footer {
-        text-align: center;
-        padding: 2rem;
-        font-size: 0.85rem;
-        color: #666;
-    }
-	:global(.fade-in-section) {
+		height: 64px;
+		background: rgba(255, 255, 255, 0.92);
+		backdrop-filter: blur(6px);
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		align-items: center;
+		padding: 0 2rem;
+		z-index: 100;
 		opacity: 0;
-		transform: translateY(30px);
-		transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+		transform: translateY(-100%);
+		transition: opacity 0.5s ease, transform 0.5s ease;
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 	}
 
-	:global(.fade-in-section.is-visible) {
+	.site-band.visible {
 		opacity: 1;
 		transform: translateY(0);
 	}
 
+	.band-contact {
+		justify-self: start;
+		color: #3a352f;
+		text-decoration: none;
+		font-size: 0.95rem;
+		letter-spacing: 0.03em;
+		border-bottom: 1px solid transparent;
+		transition: border-color 0.3s ease;
+	}
+
+	.band-contact:hover {
+		border-bottom-color: #3a352f;
+	}
+
+	.band-logo-link {
+		justify-self: center;
+		display: flex;
+		align-items: center;
+	}
+
+	.band-logo {
+		height: 34px;
+		width: auto;
+	}
+
+	.band-lang {
+		justify-self: end;
+		display: flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: 0.85rem;
+	}
+
+	.band-lang a {
+		color: #b0aaa2;
+		text-decoration: none;
+		transition: color 0.3s ease;
+	}
+
+	.band-lang a.active {
+		color: #3a352f;
+		font-weight: 600;
+	}
+
+	.band-lang a:hover {
+		color: #3a352f;
+	}
+
+	.band-lang span {
+		color: #ccc;
+	}
+
+	footer {
+		text-align: center;
+		padding: 2rem;
+		font-size: 0.85rem;
+		color: #666;
+        background: #f5f4f2;
+	}
 </style>

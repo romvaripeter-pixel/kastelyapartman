@@ -15,25 +15,33 @@ const { heading, intro, items } = Astro.props;
 ---
 
 <section class="services fade-in-section">
-	<div class="services-header">
-		<h2>{heading}</h2>
-		<p>{intro}</p>
-	</div>
+	<div class="services-inner">
+		<div class="services-header">
+			<h2>{heading}</h2>
+			<p>{intro}</p>
+		</div>
 
-	<div class="services-grid">
-		{items.map((item, index) => (
-			<div class="service-card" style={`transition-delay: ${index * 0.1}s`}>
-				<img src={item.image.src} alt={item.title} loading="lazy" />
+		<div class="services-grid">
+			{items.map((item, index) => (
+				<div class="service-card" style={`transition-delay: ${index * 0.1}s`}>
+				<div class="img-wrap">
+					<img src={item.image.src} alt={item.title} loading="lazy" />
+				</div>
 				<h3>{item.title}</h3>
 				<p>{item.text}</p>
 			</div>
-		))}
+			))}
+		</div>
 	</div>
 </section>
 
 <style>
 	.services {
 		padding: 6rem 2rem;
+		background: #ffffff;
+	}
+
+	.services-inner {
 		max-width: 1200px;
 		margin: 0 auto;
 	}
@@ -62,18 +70,41 @@ const { heading, intro, items } = Astro.props;
 		gap: 2.5rem;
 	}
 
-	.service-card {
+.service-card {
 		opacity: 0;
 		transform: translateY(20px);
 		transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+		cursor: default;
+		background: #faf6ef;
+		border-radius: 6px;
+		padding: 1rem;
+	}
+
+	.service-card.is-visible {
+		transition: opacity 0.7s ease-out, transform 0.7s ease-out, box-shadow 0.3s ease;
+	}
+
+	.service-card.is-visible:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 16px 32px rgba(0, 0, 0, 0.1);
+	}
+
+	.service-card .img-wrap {
+		overflow: hidden;
+		border-radius: 4px;
+		margin-bottom: 1.2rem;
 	}
 
 	.service-card img {
 		width: 100%;
 		aspect-ratio: 4 / 3;
 		object-fit: cover;
-		border-radius: 4px;
-		margin-bottom: 1.2rem;
+		display: block;
+		transition: transform 0.4s ease;
+	}
+
+	.service-card.is-visible:hover img {
+		transform: scale(1.05);
 	}
 
 	.service-card h3 {

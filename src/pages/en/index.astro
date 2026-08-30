@@ -53,6 +53,11 @@ import Contact from '../../components/Contact.astro';
 import logoSzallas from '../../assets/images/logo-szallas.svg';
 import airbnbLogoFull from '../../assets/images/logo-airbnb-full.svg';
 import bookingLogoFull from '../../assets/images/logo-booking-full.svg';
+
+import heroLogo from '../../assets/images/KASTELY_LOGO_W_TEXT.png';
+
+import gallery1Img from '../../assets/images/living05.jpg';
+import gallery2Img from '../../assets/images/bedroom03.jpg';
 ---
 
 <Layout
@@ -62,13 +67,16 @@ import bookingLogoFull from '../../assets/images/logo-booking-full.svg';
 >
 	<Hero
 		image={heroImage}
-		title="Kastély Apartman"
-		subtitle="Luxury home in the heart of Eger"
+		logo={heroLogo}
 	/>
 
 	<Welcome
-		heading="Luxury home in the heart of Eger"
-		text="Enjoy the elegance of a bygone era in our newly renovated home. The spacious Kastély Apartment combines unique elements of contemporary interior design with contemporary details. Located in the heart of the historic city, a stone's throw from the market hall and Dobó Square, the apartment is fully equipped to make it your home. The bedrooms include a master bedroom with a king-size bed and a guest bedroom with two single beds. The sofa in the living room can be converted into a double bed, so a total of 6 guests can sleep in the apartment."
+		intro="Experience Eger from a haven of curated style and effortless grace. Designed for the discerning traveler, this elegant apartment serves as the perfect launchpad for exploring the city's winding streets and legendary vineyards. Consider it more than just a place to stay—it is a sophisticated prelude to your journey."
+		image={livingImg}
+		title="A historic soul with a contemporary pulse? Absolutely."
+		text="Stepping into this newly renovated sanctuary means experiencing a masterclass in interior aesthetic, where the grand proportions of a bygone era blend seamlessly with striking modern details. Tucked into the absolute heart of the old town, you are just a stone's throw from the vibrant market hall and the cobblestones of Dobó Square, making the entire city effortlessly accessible. The apartment is fully equipped to serve as your private retreat, featuring a master bedroom with a plush king-size bed, a versatile guest bedroom with two single beds, and a premium living room sofa that converts into a double bed to comfortably host up to six guests. It is a space where upscale style meets effortless functionality, offering everything you need to settle in and make Eger entirely your own."
+		gallery1={gallery1Img}
+		gallery2={gallery2Img}
 	/>
 
 	<Services

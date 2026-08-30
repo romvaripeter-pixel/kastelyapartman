@@ -50,6 +50,11 @@ import Contact from '../components/Contact.astro';
 import logoSzallas from '../assets/images/logo-szallas.svg';
 import airbnbLogoFull from '../assets/images/logo-airbnb-full.svg';
 import bookingLogoFull from '../assets/images/logo-booking-full.svg';
+
+import heroLogo from '../assets/images/KASTELY_LOGO_W_TEXT.png';
+
+import gallery1Img from '../assets/images/living05.jpg';
+import gallery2Img from '../assets/images/bedroom03.jpg';
 ---
 
 <Layout
@@ -59,12 +64,16 @@ import bookingLogoFull from '../assets/images/logo-booking-full.svg';
 >
 	<Hero
 		image={heroImage}
-		title="Kastély Apartman"
-		subtitle="Luxus otthon Eger szívében"
+		logo={heroLogo}
+	/>
 	/>
 	<Welcome
-		heading="Luxus otthon Eger szívében"
-		text="Élvezze egy letűnt korszak eleganciáját újonnan felújított otthonunkban. A tágas Kastély Apartman a korabeli belsőépítészet egyedi elemeit és a kortárs részleteket vegyíti. A történelmi város szívében, a vásárcsarnoktól és a Dobó tértől kőhajításnyira található apartman teljesen felszerelt, hogy az Ön otthona legyen. A hálószobákhoz tartozik egy nagy hálószoba king-size ággyal és egy vendég hálószoba két egyszemélyes ággyal. A nappali kanapéja franciaággyá alakítható, így összesen 6 vendég aludhat az apartmanban."
+		intro="Fedezze fel Eger titkait egy olyan helyről, ahol a kifinomult stílus és a könnyed elegancia találkozik. Ezt az exkluzív apartmant a legigényesebb utazókra gondolva alakítottuk ki; tökéletes kiindulópont a hangulatos, kanyargós utcák és a legendás borvidék felfedezéséhez. Ez a szállás több mint egy hely a pihenésre — ez az Ön egri utazásának stílusos nyitánya."
+		image={livingImg}
+		title="Ahol a múlt eleganciája találkozik a ma stílusával"
+		text="Belépni ebbe a frissen felújított otthonba felér egy belsőépítészeti élménnyel: a letűnt korok nagypolgári térérzete és a letisztult, modern részletek tökéletes összhangban élnek itt egymással. Az óváros kellős közepén járva mindössze egy karnyújtásnyira található a nyüzsgő piac és a macskaköves Dobó tér, így a város legszebb részei szinte maguktól feltárulnak. Az apartman teljes felszereltségével tökéletes privát menedéket nyújt: a kényelmes franciaággyal berendezett hálószoba, a két különálló ággyal ellátott vendégszoba, valamint a nappaliban található, kétszemélyes ággyá nyitható prémium kanapé akár hat vendég számára is luxus kényelmet biztosít. Egy hely, ahol a magas esztétikum és a praktikum találkozik, megadva mindent, amire a tökéletes egri kikapcsolódáshoz szükség van."
+		gallery1={gallery1Img}
+		gallery2={gallery2Img}
 	/>
 	<Services
 		heading="Amit kínálunk"

@@ -3,28 +3,30 @@ import { Image } from 'astro:assets';
 
 interface Props {
 	image: ImageMetadata;
-	title: string;
-	subtitle: string;
+	logo: ImageMetadata;
 }
 
-const { image, title, subtitle } = Astro.props;
+const { image, logo } = Astro.props;
 ---
 
-<section class="hero">
-	<Image
-		src={image}
-		alt={title}
-		class="hero-image"
-		widths={[640, 1080, 1600, 2000]}
-		sizes="100vw"
-		format="webp"
-		quality={80}
-		loading="eager"
-	/>
-	<div class="hero-overlay"></div>
-	<div class="hero-content">
-		<h1>{title}</h1>
-		<p>{subtitle}</p>
+<section class="hero" id="hero">
+	<div class="hero-media">
+		<Image
+			src={image}
+			alt="Kastély Apartman"
+			class="hero-image"
+			widths={[640, 1080, 1600, 2000]}
+			sizes="100vw"
+			format="webp"
+			quality={80}
+			loading="eager"
+		/>
+		<div class="hero-whiteout"></div>
+		<div class="hero-overlay"></div>
+	</div>
+
+	<div class="hero-logo-wrap">
+		<img src={logo.src} alt="Kastély Apartman" class="hero-logo" />
 	</div>
 </section>
 
@@ -33,66 +35,143 @@ const { image, title, subtitle } = Astro.props;
 		position: relative;
 		height: 100vh;
 		width: 100%;
-		overflow: hidden;
 	}
 
-	.hero-image {
+	.hero-media {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		overflow: hidden;
+		z-index: -1;
+	}
+
+	.hero-media :global(.hero-image) {
 		position: absolute;
 		top: 0;
 		left: 0;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		transform-origin: center center;
+		animation: heroZoomOut 1.8s ease-out forwards;
+	}
+
+	@keyframes heroZoomOut {
+		from { transform: scale(1.18); }
+		to { transform: scale(1); }
+	}
+
+	.hero-whiteout {
+		position: absolute;
+		inset: 0;
+		background: #fff;
+		animation: heroWhiteFade 1.6s ease-out forwards;
+	}
+
+	@keyframes heroWhiteFade {
+		from { opacity: 1; }
+		to { opacity: 0; }
 	}
 
 	.hero-overlay {
 		position: absolute;
 		inset: 0;
-		background: rgba(0, 0, 0, 0.25);
+		background: rgba(0, 0, 0, 0.2);
 	}
 
-	.hero-content {
-		position: relative;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		color: white;
-	}
-
-	.hero-content h1,
-	.hero-content p {
+	.hero-logo-wrap {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 5;
 		opacity: 0;
-		animation: fadeInUp 1s ease-out forwards;
+		animation: logoFadeIn 1.4s ease-out 0.5s forwards;
+		transition: opacity 0.5s ease, transform 0.5s ease;
 	}
 
-	.hero-content p {
-		animation-delay: 0.3s;
+	.hero-logo-wrap.entered {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
 	}
 
-	@keyframes fadeInUp {
-		from {
-			opacity: 0;
-			transform: translateY(20px);
+	.hero-logo-wrap.entered.scrolled {
+		opacity: 0;
+		visibility: hidden;
+		transform: translate(-50%, -50%) translateY(-40px) scale(0.7);
+		pointer-events: none;
+		transition: opacity 0.5s ease, transform 0.5s ease, visibility 0s linear 0.5s;
+	}
+
+	@keyframes logoFadeIn {
+		from { opacity: 0; transform: translate(-50%, -50%) scale(0.92); }
+		to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+	}
+
+	.hero-logo {
+		width: min(23vw, 160px);
+		height: auto;
+		filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
+	}
+
+	@media (max-width: 700px) {
+		.hero-logo {
+			width: min(30vw, 120px);
 		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	.hero-content h1 {
-		font-size: clamp(2rem, 6vw, 4rem);
-		margin: 0;
-		font-weight: 400;
-		letter-spacing: 0.02em;
-	}
-
-	.hero-content p {
-		font-size: clamp(1rem, 2vw, 1.3rem);
-		margin-top: 0.5rem;
-		opacity: 0.9;
 	}
 </style>
+
+<script>
+	const heroImage = document.querySelector('.hero-media .hero-image');
+	const heroSection = document.getElementById('hero');
+	const logoWrap = document.querySelector('.hero-logo-wrap');
+
+	// Once the one-time entrance animations finish, explicitly clear them.
+	// Without this, the held (forwards-filled) animation keeps overriding
+	// any later inline-style or class-based changes to the same properties.
+	function releaseAnimation(el, onDone) {
+		if (!el) return;
+		el.addEventListener(
+			'animationend',
+			() => {
+				el.style.animation = 'none';
+				if (onDone) onDone();
+			},
+			{ once: true }
+		);
+	}
+	releaseAnimation(heroImage);
+	releaseAnimation(logoWrap, () => logoWrap.classList.add('entered'));
+
+	const SCROLL_THRESHOLD = 10;
+	let ticking = false;
+
+	function updateOnScroll() {
+		const scrollY = window.scrollY;
+
+		if (heroImage && heroSection) {
+			const heroHeight = heroSection.offsetHeight || window.innerHeight;
+			const progress = Math.min(1, scrollY / heroHeight);
+			const scale = 1 + progress * 0.35;
+			heroImage.style.transform = `scale(${scale})`;
+		}
+
+		if (logoWrap) {
+			logoWrap.classList.toggle('scrolled', scrollY > SCROLL_THRESHOLD);
+		}
+
+		ticking = false;
+	}
+
+	function onScroll() {
+		if (!ticking) {
+			requestAnimationFrame(updateOnScroll);
+			ticking = true;
+		}
+	}
+
+	window.addEventListener('scroll', onScroll, { passive: true });
+	updateOnScroll();
+</script>
