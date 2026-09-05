@@ -127,7 +127,7 @@ const ambientPositions = ambientWords.map((word, i) => {
 
 	.ambient-drift {
 		display: inline-block;
-		font-family: Georgia, serif;
+		font-family: var(--font-serif);
 		font-style: italic;
 		color: #6b6259;
 		opacity: calc(0.15 + var(--depth) * 0.6);
@@ -162,7 +162,7 @@ const ambientPositions = ambientWords.map((word, i) => {
 		animation-iteration-count: infinite;
 	}
 
-    .star:hover .star-drift,
+	.star:hover .star-drift,
 	.star.card-open .star-drift {
 		animation-play-state: paused;
 	}
@@ -173,7 +173,7 @@ const ambientPositions = ambientWords.map((word, i) => {
 	}
 
 	.star-snippet {
-		font-family: Georgia, serif;
+		font-family: var(--font-serif);
 		font-style: italic;
 		white-space: nowrap;
 		color: #3a352f;
@@ -255,37 +255,34 @@ const ambientPositions = ambientWords.map((word, i) => {
 			min-height: 70vh;
 		}
 
-		.star-card {
-			width: 220px;
-		}
-	}
-
-		@media (max-width: 700px) {
 		.star-snippet {
 			white-space: normal;
 			max-width: 42vw;
 			text-align: center;
 		}
 	}
-		@media (max-width: 700px) {
-		.star-card {
-			position: fixed;
-			top: 50%;
-			left: 50%;
-			bottom: auto;
-			transform: translate(-50%, -50%) scale(0.92);
-			width: 80vw;
-			max-width: 300px;
-		}
 
-		.star:hover .star-card,
-		.star.card-open .star-card {
-			transform: translate(-50%, -50%) scale(1);
-		}
+	.star-card.mobile-detached {
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		bottom: auto;
+		transform: translate(-50%, -50%) scale(0.92);
+		width: 75vw;
+		max-width: 250px;
+		opacity: 0;
+		pointer-events: none;
+		z-index: 200;
+	}
 
-		.star-card-arrow {
-			display: none;
-		}
+	.star-card.mobile-detached.mobile-active {
+		opacity: 1;
+		pointer-events: auto;
+		transform: translate(-50%, -50%) scale(1);
+	}
+
+	.star-card.mobile-detached .star-card-arrow {
+		display: none;
 	}
 </style>
 
@@ -294,7 +291,7 @@ const ambientPositions = ambientWords.map((word, i) => {
 	const floaters = document.querySelectorAll('.star, .ambient-word');
 	const stars = document.querySelectorAll('.star');
 
-		function compressForMobile() {
+	function compressForMobile() {
 		const isMobile = window.innerWidth <= 700;
 		document.querySelectorAll('.star, .ambient-word').forEach((el) => {
 			if (!el.dataset.baseLeft) {
@@ -311,6 +308,25 @@ const ambientPositions = ambientWords.map((word, i) => {
 	window.addEventListener('resize', compressForMobile);
 	compressForMobile();
 
+	function setupMobileCards() {
+		const isMobile = window.innerWidth <= 700;
+		stars.forEach((star) => {
+			const card = star.querySelector('.star-card');
+			if (!card) return;
+			if (isMobile && card.parentElement !== document.body) {
+				card.dataset.homeId = star.getAttribute('data-id');
+				document.body.appendChild(card);
+				card.classList.add('mobile-detached');
+			} else if (!isMobile && card.classList.contains('mobile-detached')) {
+				const drift = star.querySelector('.star-drift');
+				if (drift) drift.appendChild(card);
+				card.classList.remove('mobile-detached', 'mobile-active');
+			}
+		});
+	}
+	setupMobileCards();
+	window.addEventListener('resize', setupMobileCards);
+
 	function applyParallax(clientX, clientY) {
 		if (!canvas) return;
 		const rect = canvas.getBoundingClientRect();
@@ -318,7 +334,7 @@ const ambientPositions = ambientWords.map((word, i) => {
 		const relY = (clientY - rect.top) / rect.height - 0.5;
 		floaters.forEach((el) => {
 			if (el.classList.contains('star') && (el.matches(':hover') || el.classList.contains('card-open'))) {
-				return; // frozen while selected — keeps it steady and easy to read
+				return;
 			}
 			const depth = parseFloat(getComputedStyle(el).getPropertyValue('--depth')) || 0.3;
 			const strength = 18 * depth;
@@ -340,13 +356,23 @@ const ambientPositions = ambientWords.map((word, i) => {
 	stars.forEach((star) => {
 		star.addEventListener('click', (e) => {
 			e.stopPropagation();
-			const isOpen = star.classList.contains('card-open');
-			stars.forEach((s) => s.classList.remove('card-open'));
-			if (!isOpen) star.classList.add('card-open');
+			const isMobile = window.innerWidth <= 700;
+			const card = star.querySelector('.star-card') || document.querySelector(`.star-card[data-home-id="${star.getAttribute('data-id')}"]`);
+
+			if (isMobile && card) {
+				const isOpen = card.classList.contains('mobile-active');
+				document.querySelectorAll('.star-card.mobile-active').forEach((c) => c.classList.remove('mobile-active'));
+				if (!isOpen) card.classList.add('mobile-active');
+			} else {
+				const isOpen = star.classList.contains('card-open');
+				stars.forEach((s) => s.classList.remove('card-open'));
+				if (!isOpen) star.classList.add('card-open');
+			}
 		});
 	});
 	document.addEventListener('click', () => {
 		stars.forEach((s) => s.classList.remove('card-open'));
+		document.querySelectorAll('.star-card.mobile-active').forEach((c) => c.classList.remove('mobile-active'));
 	});
 
 	const dropObserver = new IntersectionObserver(
