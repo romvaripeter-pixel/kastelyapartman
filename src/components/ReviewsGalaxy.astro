@@ -267,6 +267,26 @@ const ambientPositions = ambientWords.map((word, i) => {
 			text-align: center;
 		}
 	}
+		@media (max-width: 700px) {
+		.star-card {
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			bottom: auto;
+			transform: translate(-50%, -50%) scale(0.92);
+			width: 80vw;
+			max-width: 300px;
+		}
+
+		.star:hover .star-card,
+		.star.card-open .star-card {
+			transform: translate(-50%, -50%) scale(1);
+		}
+
+		.star-card-arrow {
+			display: none;
+		}
+	}
 </style>
 
 <script>
@@ -281,7 +301,7 @@ const ambientPositions = ambientWords.map((word, i) => {
 				el.dataset.baseLeft = parseFloat(el.style.left);
 				el.dataset.baseTop = parseFloat(el.style.top);
 			}
-			const factor = isMobile ? 0.55 : 1;
+			const factor = isMobile ? 0.88 : 1;
 			const newLeft = 50 + (parseFloat(el.dataset.baseLeft) - 50) * factor;
 			const newTop = 50 + (parseFloat(el.dataset.baseTop) - 50) * factor;
 			el.style.left = `${newLeft}%`;

@@ -121,6 +121,17 @@ const { image, logo } = Astro.props;
 			width: min(30vw, 120px);
 		}
 	}
+
+		@media (max-width: 600px) and (orientation: portrait) {
+		.hero,
+		.hero-media {
+			height: 65vh;
+		}
+
+		.hero-logo-wrap {
+			top: 32.5%;
+		}
+	}
 </style>
 
 <script>
