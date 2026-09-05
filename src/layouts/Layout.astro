@@ -87,6 +87,10 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : 'Contact';
 		--font-sans: 'Inter', system-ui, sans-serif;
 	}
 
+	:global(html, body) {
+		overflow-x: hidden;
+	}
+
 	:global(body) {
 		margin: 0;
 		font-family: var(--font-sans);
@@ -180,4 +184,23 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : 'Contact';
 		color: #666;
         background: #f5f4f2;
 	}
+	@media (max-width: 480px) {
+		.site-band {
+			padding: 0 0.75rem;
+			height: 56px;
+		}
+
+		.band-contact {
+			font-size: 0.8rem;
+		}
+
+		.band-lang {
+			font-size: 0.8rem;
+			gap: 0.3rem;
+		}
+
+		.band-logo {
+			height: 28px;
+		}
+	}	
 </style>
