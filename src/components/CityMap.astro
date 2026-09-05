@@ -222,6 +222,20 @@ const { mapImage, items } = Astro.props;
 			grid-template-columns: 1fr;
 		}
 	}
+
+	@media (max-width: 700px) {
+		.landmarks-caption {
+			height: 13rem;
+		}
+
+		.landmarks-caption h3 {
+			font-size: 1rem;
+		}
+
+		.landmarks-caption p {
+			font-size: 0.85rem;
+		}
+	}
 </style>
 
 <script>
@@ -332,12 +346,20 @@ const { mapImage, items } = Astro.props;
 		}
 	}
 
+	function toggleOnClick(id, title, text) {
+		if (id === activeId) {
+			requestClear();
+		} else {
+			request(id, title, text);
+		}
+	}
+
 	thumbs.forEach((thumb) => {
 		const id = thumb.getAttribute('data-id');
 		const title = thumb.getAttribute('data-title');
 		const text = thumb.getAttribute('data-text');
 		thumb.addEventListener('mouseenter', () => request(id, title, text));
-		thumb.addEventListener('click', () => request(id, title, text));
+		thumb.addEventListener('click', () => toggleOnClick(id, title, text));
 	});
 
 	mapIcons.forEach((icon) => {
@@ -345,7 +367,7 @@ const { mapImage, items } = Astro.props;
 		const title = icon.getAttribute('data-title');
 		const text = icon.getAttribute('data-text');
 		icon.addEventListener('mouseenter', () => request(id, title, text));
-		icon.addEventListener('click', () => request(id, title, text));
+		icon.addEventListener('click', () => toggleOnClick(id, title, text));
 	});
 
 	if (cityMapSection) {

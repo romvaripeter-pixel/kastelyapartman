@@ -259,12 +259,37 @@ const ambientPositions = ambientWords.map((word, i) => {
 			width: 220px;
 		}
 	}
+
+		@media (max-width: 700px) {
+		.star-snippet {
+			white-space: normal;
+			max-width: 42vw;
+			text-align: center;
+		}
+	}
 </style>
 
 <script>
 	const canvas = document.getElementById('galaxy-canvas');
 	const floaters = document.querySelectorAll('.star, .ambient-word');
 	const stars = document.querySelectorAll('.star');
+
+		function compressForMobile() {
+		const isMobile = window.innerWidth <= 700;
+		document.querySelectorAll('.star, .ambient-word').forEach((el) => {
+			if (!el.dataset.baseLeft) {
+				el.dataset.baseLeft = parseFloat(el.style.left);
+				el.dataset.baseTop = parseFloat(el.style.top);
+			}
+			const factor = isMobile ? 0.55 : 1;
+			const newLeft = 50 + (parseFloat(el.dataset.baseLeft) - 50) * factor;
+			const newTop = 50 + (parseFloat(el.dataset.baseTop) - 50) * factor;
+			el.style.left = `${newLeft}%`;
+			el.style.top = `${newTop}%`;
+		});
+	}
+	window.addEventListener('resize', compressForMobile);
+	compressForMobile();
 
 	function applyParallax(clientX, clientY) {
 		if (!canvas) return;
