@@ -362,11 +362,15 @@ const { mapImage, items } = Astro.props;
 		}
 	}
 
+	const supportsHover = window.matchMedia('(hover: hover)').matches;
+
 	thumbs.forEach((thumb) => {
 		const id = thumb.getAttribute('data-id');
 		const title = thumb.getAttribute('data-title');
 		const text = thumb.getAttribute('data-text');
-		thumb.addEventListener('mouseenter', () => request(id, title, text));
+		if (supportsHover) {
+			thumb.addEventListener('mouseenter', () => request(id, title, text));
+		}
 		thumb.addEventListener('click', () => toggleOnClick(id, title, text));
 	});
 
@@ -374,7 +378,9 @@ const { mapImage, items } = Astro.props;
 		const id = icon.getAttribute('data-id');
 		const title = icon.getAttribute('data-title');
 		const text = icon.getAttribute('data-text');
-		icon.addEventListener('mouseenter', () => request(id, title, text));
+		if (supportsHover) {
+			icon.addEventListener('mouseenter', () => request(id, title, text));
+		}
 		icon.addEventListener('click', () => toggleOnClick(id, title, text));
 	});
 
