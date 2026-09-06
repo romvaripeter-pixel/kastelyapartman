@@ -9,9 +9,8 @@ interface Props {
 
 const { title, description, lang } = Astro.props;
 
-const homeHref = lang === 'hu' ? '/' : '/en/';
-const otherLangHref = lang === 'hu' ? '/en/' : '/';
-const contactLabel = lang === 'hu' ? 'Kapcsolat' : 'Contact';
+const homeHref = lang === 'hu' ? '/' : lang === 'pl' ? '/pl/' : '/en/';
+const contactLabel = lang === 'hu' ? 'Kapcsolat' : lang === 'pl' ? 'Kontakt' : 'Contact';
 ---
 
 <html lang={lang}>
@@ -38,6 +37,8 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : 'Contact';
 				<a href="/" class:list={[lang === 'hu' && 'active']}>HU</a>
 				<span>/</span>
 				<a href="/en/" class:list={[lang === 'en' && 'active']}>EN</a>
+				<span>/</span>
+				<a href="/pl/" class:list={[lang === 'pl' && 'active']}>PL</a>
 			</div>
 		</nav>
 
@@ -154,7 +155,7 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : 'Contact';
 		justify-self: end;
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: 0.3em;
 		font-size: 0.85rem;
 	}
 
@@ -195,8 +196,8 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : 'Contact';
 		}
 
 		.band-lang {
-			font-size: 0.8rem;
-			gap: 0.3rem;
+			font-size: 0.75rem
+			gap: 0.22em;
 		}
 
 		.band-logo {
