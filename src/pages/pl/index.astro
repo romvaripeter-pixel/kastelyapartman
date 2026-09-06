@@ -1,0 +1,291 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Hero from '../../components/Hero.astro';
+import Welcome from '../../components/Welcome.astro';
+import heroImage from '../../assets/images/bedroom01.jpg';
+import livingImg from '../../assets/images/living01.jpg';
+import outsideImg from '../../assets/images/outisde01.jpg';
+import kitchenImg from '../../assets/images/kitchen03.jpg';
+import netflixImg from '../../assets/images/living04_Netflix.jpg';
+import parkingImg from '../../assets/images/parking01.jpg';
+import Services from '../../components/Services.astro';
+import RoomPlan from '../../components/RoomPlan.astro';
+import planImage from '../../assets/images/plan03.jpg';
+import bedroomMasterImg from '../../assets/images/bedroom01.jpg';
+import bedroomSecondImg from '../../assets/images/bedroom04.jpg';
+import livingRoomImg from '../../assets/images/living01.jpg';
+import diningImg from '../../assets/images/dining01.jpg';
+import hallImg from '../../assets/images/central_hall_01.jpg';
+import bathroomImg from '../../assets/images/bathroom01.jpg';
+import kitchenPlanImg from '../../assets/images/kitchen01.jpg';
+
+import CityMap from '../../components/CityMap.astro';
+import cityMapImage from '../../assets/images/city-map-blank.jpg';
+
+import iconApartman from '../../assets/images/icon-kastely-apartman.png';
+import iconMinaret from '../../assets/images/icon-minaret.png';
+import iconVar from '../../assets/images/icon-egri-var.png';
+import iconDobo from '../../assets/images/icon-dobo-ter.png';
+import iconErseki from '../../assets/images/icon-erseki-palota.png';
+import iconCsillag from '../../assets/images/icon-csillagvizsgalo.png';
+import iconBazilika from '../../assets/images/icon-egri-bazilika.png';
+import iconTermal from '../../assets/images/icon-termalfurdo.png';
+import iconSzepasszony from '../../assets/images/icon-szepasszony-volgy.png';
+
+import photoApartman from '../../assets/images/photo-kastely-apartman.jpg';
+import photoMinaret from '../../assets/images/photo-minaret.jpg';
+import photoVar from '../../assets/images/photo-egri-var.jpg';
+import photoDobo from '../../assets/images/photo-dobo-ter.jpg';
+import photoErseki from '../../assets/images/photo-erseki-palota.jpg';
+import photoCsillag from '../../assets/images/photo-csillagvizsgalo.jpg';
+import photoBazilika from '../../assets/images/photo-egri-bazilika.jpg';
+import photoTermal from '../../assets/images/photo-termalfurdo.jpg';
+import photoSzepasszony from '../../assets/images/photo-szepasszony-volgy.jpg';
+
+import ReviewsGalaxy from '../../components/ReviewsGalaxy.astro';
+import airbnbLogo from '../../assets/images/logo-airbnb.svg';
+import bookingLogo from '../../assets/images/logo-booking.svg';
+
+import Contact from '../../components/Contact.astro';
+import logoSzallas from '../../assets/images/logo-szallas.svg';
+import airbnbLogoFull from '../../assets/images/logo-airbnb-full.svg';
+import bookingLogoFull from '../../assets/images/logo-booking-full.svg';
+
+import heroLogo from '../../assets/images/KASTELY_LOGO_W_TEXT.png';
+
+import gallery1Img from '../../assets/images/living05.jpg';
+import gallery2Img from '../../assets/images/bedroom03.jpg';
+---
+
+<Layout
+	title="Kastély Apartman | Eger"
+	description="Luksusowy apartament w sercu Egeru – świeżo odnowione, eleganckie mieszkanie na wynajem krótkoterminowy."
+	lang="pl"
+>
+	<Hero
+		image={heroImage}
+		logo={heroLogo}
+	/>
+
+	<Welcome
+		intro="Odkryj Eger z miejsca, w którym wyrafinowany styl spotyka się z lekką elegancją. Ten ekskluzywny apartament zaprojektowano z myślą o wymagających podróżnych – to doskonały punkt wypadowy do odkrywania malowniczych uliczek miasta i legendarnego regionu winiarskiego. To coś więcej niż miejsce noclegu — to stylowa uwertura Twojej podróży po Egerze."
+		image={livingImg}
+		title="Historyczna dusza w rytmie współczesności? Zdecydowanie."
+		text="Wejście do tego świeżo odnowionego wnętrza to prawdziwa lekcja aranżacji wnętrz: rozmach dawnej epoki harmonijnie łączy się tu z wyrazistymi, nowoczesnymi detalami. Usytuowany w samym sercu starówki apartament znajduje się o rzut kamieniem od tętniącej życiem hali targowej i brukowanego placu Dobó, dzięki czemu całe miasto masz w zasięgu ręki. Mieszkanie jest w pełni wyposażone i stanowi prywatną oazę spokoju: sypialnia główna z wygodnym łóżkiem king-size, wszechstronny pokój gościnny z dwoma pojedynczymi łóżkami oraz rozkładana sofa w salonie, która pomieści łącznie do sześciu gości. To miejsce, w którym elegancja spotyka się z funkcjonalnością, oferując wszystko, czego potrzeba, by poczuć się w Egerze jak u siebie."
+		gallery1={gallery1Img}
+		gallery2={gallery2Img}
+	/>
+
+	<Services
+		heading="Co oferujemy"
+		intro="Oferujemy pełen zakres udogodnień, by Twój pobyt był komfortowy i relaksujący. Jeśli czegoś zabraknie, po prostu daj nam znać – chętnie pomożemy!"
+		items={[
+			{
+				image: livingImg,
+				title: "Cały apartament tylko dla Was",
+				text: "Korzystaj z całego apartamentu na wyłączność — mnóstwo przestrzeni dla rodzin, par czy grup przyjaciół, by odpocząć i poczuć się jak w domu."
+			},
+			{
+				image: outsideImg,
+				title: "Doskonała lokalizacja",
+				text: "Zaledwie kilka minut spacerem od placu Dobó i Zamku w Egerze. Łatwy dostęp do centrum miasta, a jednocześnie ciche, spokojne otoczenie sprzyjające wypoczynkowi."
+			},
+			{
+				image: kitchenImg,
+				title: "W pełni wyposażona kuchnia",
+				text: "Niezależnie od tego, czy szykujesz szybkie śniadanie, czy gotujesz samodzielnie, znajdziesz tu wszystko, czego potrzebujesz — czajnik, ekspres do kawy, zmywarkę i wiele innych kuchennych akcesoriów."
+			},
+			{
+				image: netflixImg,
+				title: "Nowoczesne udogodnienia",
+				text: "Ciesz się błyskawicznym Wi-Fi, ulubionymi serwisami streamingowymi na 55-calowym telewizorze Smart TV, muzyką z głośnika Sonos lub pracą w wygodnym kąciku biurowym. Nowoczesny komfort i elegancja w standardzie."
+			},
+			{
+				image: parkingImg,
+				title: "Parking na miejscu",
+				text: "Zapomnij o stresie związanym z parkowaniem. Dzięki parkingowi na miejscu zostawisz samochód bezpiecznie, tuż obok apartamentu."
+			}
+		]}
+	/>
+
+	<RoomPlan
+		planImage={planImage}
+		placeholderText="Najedź na pokój, aby go zobaczyć"
+		buildingPath="M28,1341 L45,1158 L101,1148 L108,1030 L60,1017 L68,883 L120,874 L125,807 L81,772 L91,608 L129,600 L133,559 L96,511 L94,467 L501,359 L449,149 L921,36 L933,59 L963,63 L991,70 L1025,82 L1021,104 L1064,135 L1082,121 L1093,134 L1084,160 L1103,191 L1124,189 L1129,201 L1113,244 L1111,259 L1129,266 L1119,298 L1106,333 L1178,317 L1279,548 L1268,568 L1294,631 L1303,628 L1365,779 L1136,870 L1169,968 L1096,1015 L998,1051 L1003,1061 L1037,1076 L984,1094 L1001,1062 L995,1052 L713,1156 L718,1188 Z"
+		rooms={[
+			{
+				id: "bedroom-master",
+				title: "Sypialnia główna",
+				image: bedroomMasterImg,
+				points: "32,1333,719,1181,602,620,83,748",
+				path: "M32,1333 L719,1181 L602,620 L83,748 Z"
+			},
+			{
+				id: "bedroom-second",
+				title: "Druga sypialnia",
+				image: bedroomSecondImg,
+				points: "81,764,94,609,133,601,133,557,96,512,96,466,503,357,564,643",
+				path: "M81,764 L94,609 L133,601 L133,557 L96,512 L96,466 L503,357 L564,643 Z"
+			},
+			{
+				id: "living",
+				title: "Salon",
+				image: livingRoomImg,
+				points: "535,503,449,145,922,35,934,57,983,67,1025,79,1023,101,1065,128,1082,113,1092,128,1085,155,1104,185,1121,185,1129,197,1109,251,1129,261,1119,296,1089,333,1092,348,937,402,912,520,557,611",
+				path: "M535,503 L449,145 L922,35 L934,57 L983,67 L1025,79 L1023,101 L1065,128 L1082,113 L1092,128 L1085,155 L1104,185 L1121,185 L1129,197 L1109,251 L1129,261 L1119,296 L1089,333 L1092,348 L937,402 L912,520 L557,611 Z"
+			},
+			{
+				id: "dining",
+				title: "Jadalnia",
+				image: diningImg,
+				points: "932,395,904,403,817,237,827,101,920,83,1004,99,1067,134,1100,189,1084,257,1074,284,1057,303,1001,328,919,356",
+				path: "M932,395 L904,403 L817,237 L827,101 L920,83 L1004,99 L1067,134 L1100,189 L1084,257 L1074,284 L1057,303 L1001,328 L919,356 Z"
+			},
+			{
+				id: "hall",
+				title: "Hol",
+				image: hallImg,
+				points: "601,878,548,634,562,628,523,496,969,380,1089,720,1022,741,1018,730,990,802,635,917",
+				path: "M601,878 L548,634 L562,628 L523,496 L969,380 L1089,720 L1022,741 L1018,730 L990,802 L635,917 Z"
+			},
+			{
+				id: "bathroom",
+				title: "Łazienka",
+				image: bathroomImg,
+				points: "599,867,658,1153,924,1059,840,786",
+				path: "M599,867 L658,1153 L924,1059 L840,786 Z"
+			},
+			{
+				id: "kitchen",
+				title: "Kuchnia",
+				image: kitchenPlanImg,
+				points: "910,517,936,403,1190,343,1280,541,1266,562,1290,625,1304,622,1316,658,1024,750,996,802",
+				path: "M910,517 L936,403 L1190,343 L1280,541 L1266,562 L1290,625 L1304,622 L1316,658 L1024,750 L996,802 Z"
+			}
+		]}
+	/>
+
+	<ReviewsGalaxy
+		headline="Nasza historia to niezliczone, niezapomniane chwile."
+		airbnbLogo={airbnbLogo}
+		bookingLogo={bookingLogo}
+		reviews={[
+			{ id: "rodrigo", snippet: "Cudowne miejsce", fullText: "Cudowne miejsce. Bardzo gustownie urządzone, z eleganckimi meblami i nowoczesnym wyposażeniem kuchni. Wysokie sufity, a zwłaszcza sypialnia główna, emanują szlachetnym klimatem — mogłyby śmiało konkurować z apartamentem w pięciogwiazdkowym hotelu w Londynie czy Paryżu. Nieskazitelna czystość, doskonała lokalizacja, cisza, a mimo to kilka minut spacerem od historycznego centrum i zamku. Joli to niezwykle miła i pomocna gospodyni. Własny garaż to ogromna wygoda. Sąsiedzi również bardzo przyjaźni. Apartament jest przestronny, przytulny, z doskonałym systemem dźwiękowym Sonos. Gorąco polecam.", guestName: "Rodrigo", source: "airbnb", x: 82.8, y: 50.0, depth: 0.30 },
+			{ id: "michal", snippet: "Przerosło wszelkie oczekiwania", fullText: "Luksusowy i niezwykle wyszukany apartament, pięknie odnowiony i urządzony. Joli szczegółowo pomogła nam z przyjazdem. Miejsce przerosło wszelkie oczekiwania. Czysto, przestronnie, zadbano o każdy szczegół. W pełni wyposażona kuchnia, wygodne łóżka, duża łazienka, przyjemna atmosfera. Na pewno wrócę.", guestName: "Michal", source: "airbnb", x: 30.0, y: 71.9, depth: 0.83 },
+			{ id: "michael-2", snippet: "Elegancja najwyższej klasy", fullText: "Peter i Jola byli wspaniałymi gospodarzami, niezwykle mili i pomocni. To miejsce to doskonały przykład eleganckiego zakwaterowania najwyższej klasy. Wnętrza i meble były wyrafinowane i gustowne. Miałem wrażenie, że lada moment do salonu wejdzie kamerdyner. 😀", guestName: "Michael", source: "airbnb", x: 54.5, y: 35.0, depth: 0.66 },
+			{ id: "sara", snippet: "Jeszcze piękniejsze niż na zdjęciach", fullText: "Byliśmy bardzo zadowoleni z pobytu! W rzeczywistości jest jeszcze piękniejsze niż na zdjęciach. Mnóstwo przestrzeni i wszystko, czego potrzeba. Gorąco polecam na kolejną wizytę w Egerze.", guestName: "Sara", source: "airbnb", x: 84.3, y: 82.1, depth: 0.49 },
+			{ id: "george", snippet: "Blisko centrum, a jednak cicho", fullText: "Pięknie i gustownie odnowiony, bardzo przestronny apartament. Doskonała izolacja akustyczna — mimo że mieszkanie znajduje się przy placu, niemal nie słychać hałasu ulicznego. Dobrze wyposażona kuchnia, łatwy dostęp do centrum.", guestName: "George", source: "airbnb", x: 10.0, y: 41.4, depth: 0.32 },
+			{ id: "martina", snippet: "Fantastycznie", fullText: "Wszystko było fantastyczne, apartament piękny i dopracowany pod każdym względem. W pełni wyposażony, idealny dla 6 osób. Centrum miasta to zaledwie pięć minut spacerem malowniczą trasą wzdłuż potoku. Jolán była bardzo miła i pomocna, szybko odpowiadała i elastycznie podeszła do zameldowania i wymeldowania.", guestName: "Martina", source: "airbnb", x: 90.0, y: 24.8, depth: 0.85 },
+			{ id: "eniko", snippet: "Jak w pięciogwiazdkowym hotelu", fullText: "Przepiękny apartament, niczym apartament w pięciogwiazdkowym hotelu. Wszystko dokładnie takie, jak na zdjęciach. Przestronnie, przytulnie, ładnie i gustownie. Czuliśmy się świetnie, śmiało polecam każdemu.", guestName: "Enikő", source: "airbnb", x: 39, y: 85.0, depth: 0.35 },
+			{ id: "yunjin", snippet: "Nigdy wcześniej czegoś takiego nie doświadczyłam", fullText: "Mieszkałam już w niezliczonych apartamentach na Airbnb, ale czegoś takiego jeszcze nie doświadczyłam. Planowałam wieczorne wyjście, ale mieszkanie było tak zachwycające, że wolałam zostać, gotować i odpoczywać. Przestronne, piękne, w pełni wyposażone — w kuchni był nawet makaron! Łazienka nieskazitelnie czysta. Gospodarze szybko odpowiadali i pomogli z wcześniejszym zameldowaniem oraz późniejszym wymeldowaniem. Polecam z pełnym zaufaniem.", guestName: "Yunjin", source: "airbnb", x: 28.7, y: 20.6, depth: 1.00 },
+			{ id: "ferenc", snippet: "Świetna lokalizacja", fullText: "Nieskazitelnie czysty, dobrze wyposażony, przestronny apartament, dokładnie taki jak na zdjęciach. Świetna lokalizacja, bez zarzutu pod każdym względem. Przyjechaliśmy z trójką dzieci — one też były zachwycone. Same dziesiątki.", guestName: "Ferenc", source: "booking", x: 90, y: 61.8, depth: 0.34 },
+			{ id: "jagoda", snippet: "Spokojna, relaksująca atmosfera", fullText: "Fantastycznie! Kastély Apartman to bardzo przyjemne, zadbane i wygodne miejsce na pobyt. Czysto, estetycznie urządzone i świetnie wyposażone. Atmosfera spokojna i relaksująca. Na szczególne uznanie zasługuje uczciwość i życzliwość właściciela — po wyjeździe okazało się, że zapomnieliśmy portfela, który właściciel odesłał nam w stanie nienaruszonym. Polecam z całego serca.", guestName: "Jagoda", source: "booking", x: 10.0, y: 65.8, depth: 0.87 },
+			{ id: "zoltan", snippet: "Absolutnie wspaniale", fullText: "Absolutnie wspaniale. 500 metrów od centrum i 600 metrów od zamku, w bardzo cichej okolicy. Ogromne pokoje, gustowne wyposażenie, prywatny parking i nienaganna czystość.", guestName: "Zoltán", source: "booking", x: 75.0, y: 18.0, depth: 0.70 },
+			{ id: "magdalena", snippet: "Poczuj się jak królowa", fullText: "W tym apartamencie można poczuć się jak królowa. Fantastycznie przestronne, stylowo urządzone mieszkanie z piękną podłogą i eleganckim wnętrzem. Osobna toaleta i wygodna wanna to dodatkowy atut. Bezpieczny parking wliczony w cenę. Doskonały kontakt z właścicielem.", guestName: "Magdalena", source: "booking", x: 71.5, y: 90.0, depth: 0.53 },
+			{ id: "imre", snippet: "Fantastyczny klimat", fullText: "Atmosfera apartamentu jest fantastyczna — jakby cofnąć się do początków XX wieku, a jednocześnie ciesząc się pełnią nowoczesnych udogodnień. Świetna lokalizacja w centrum miasta i niezwykle miły, pomocny gospodarz.", guestName: "Imre", source: "booking", x: 30.0, y: 37.1, depth: 0.36 },
+			{ id: "krisztina", snippet: "Jakby nocleg w zamku", fullText: "Jeden z najpiękniejszych apartamentów, w jakich kiedykolwiek byliśmy! To uczucie, jakby nocować w zamku. Dbałość o każdy szczegół, piękne meble, doskonale wyposażona kuchnia i świetna lokalizacja blisko centrum. Osoba kontaktowa była bardzo miła i pomocna.", guestName: "Krisztina", source: "booking", x: 90.0, y: 35.0, depth: 0.89 }
+		]}
+	/>
+
+	<CityMap
+		mapImage={cityMapImage}
+		items={[
+			{
+				id: "apartman",
+				title: "Kastély Apartman – idealna baza do zwiedzania Egeru!",
+				text: "Mimo centralnego położenia apartament ukryty jest w cichym, zielonym zakątku miasta. To doskonały punkt wyjścia do odkrywania tajemnic Egeru, a po pełnym wrażeń dniu — idealne miejsce na spokojny wypoczynek.",
+				icon: iconApartman,
+				photo: photoApartman,
+				left: 50.46,
+				top: 27.21,
+				isApartment: true
+			},
+			{
+				id: "dobo-ter",
+				title: "Plac Dobó",
+				text: "Rozpocznij swoją przygodę z Egerem w samym sercu miasta! Spacerując wśród zachwycających barokowych kamienic tego symbolicznego placu, od razu poczujesz autentyczny, historyczny klimat.",
+				icon: iconDobo,
+				photo: photoDobo,
+				left: 64.42,
+				top: 46.35
+			},
+			{
+				id: "egri-var",
+				title: "Zamek w Egerze",
+				text: "Wkrocz do krainy legend i zwiedź jedną z najbardziej znanych i najchętniej odwiedzanych twierdz na Węgrzech! Chwalebna historia bohaterów Egeru oraz wspaniała panorama roztaczająca się z murów zamku gwarantują niezapomniane wrażenia.",
+				icon: iconVar,
+				photo: photoVar,
+				left: 70.80,
+				top: 39.19
+			},
+			{
+				id: "erseki-palota",
+				title: "Pałac Arcybiskupi",
+				text: "Daj się oczarować jednym z najpiękniejszych, najcenniejszych i najbardziej okazałych zabytków architektury w centrum miasta. W murach dawnej rezydencji duchownych zajrzysz w kulisy pełnego przepychu i tajemnic życia arcybiskupów.",
+				icon: iconErseki,
+				photo: photoErseki,
+				left: 50.53,
+				top: 47.63
+			},
+			{
+				id: "egri-bazilika",
+				title: "Bazylika w Egerze",
+				text: "Podziwiaj drugi co do wielkości kościół na Węgrzech, będący jednym z najwybitniejszych dzieł architektury klasycystycznej w kraju. Monumentalne wnętrze i majestatyczne organy z pewnością zrobią na Tobie ogromne wrażenie.",
+				icon: iconBazilika,
+				photo: photoBazilika,
+				left: 52.45,
+				top: 55.99
+			},
+			{
+				id: "minaret",
+				title: "Minaret",
+				text: "Zobacz prawdziwą światową osobliwość — wieżę modlitewną z czasów osmańskich, zwieńczoną chrześcijańskim krzyżem! Jeśli nie boisz się wąskich schodów, ze szczytu rozciąga się niepowtarzalny widok na całe centrum miasta.",
+				icon: iconMinaret,
+				photo: photoMinaret,
+				left: 60.52,
+				top: 34.02
+			},
+			{
+				id: "szepasszony-volgy",
+				title: "Dolina Pięknych Pań",
+				text: "Pobyt w Egerze to także wino: ta dolina to najbardziej kultowe i najchętniej odwiedzane miejsce degustacji win w mieście. Skosztuj słynnego Egri Bikavér (Byczej Krwi) w klimatycznych piwniczkach wykutych w riolitowym tufie!",
+				icon: iconSzepasszony,
+				photo: photoSzepasszony,
+				left: 8.86,
+				top: 80.72
+			},
+			{
+				id: "csillagvizsgalo",
+				title: "Obserwatorium i Centrum Nauki",
+				text: "Odkryj najstarszą wciąż działającą camera obscura na kontynencie i obserwuj miasto na żywo! Centrum, mieszczące się na szczycie budynku Liceum, oferuje również zapierającą dech panoramę i wciągające naukowe atrakcje.",
+				icon: iconCsillag,
+				photo: photoCsillag,
+				left: 61.66,
+				top: 54.64
+			},
+			{
+				id: "termalfurdo",
+				title: "Kąpielisko termalne",
+				text: "Zrelaksuj się w jednym z najpiękniejszych i najbardziej zielonych kąpielisk miejskich w kraju, rozłożonym na 5 hektarach parku! Trzynaście różnych basenów oraz lecznicza woda termalna to doskonały wypoczynek dla całej rodziny po dniu zwiedzania.",
+				icon: iconTermal,
+				photo: photoTermal,
+				left: 83.35,
+				top: 63.78
+			}
+		]}
+	/>
+
+	<Contact
+		heading="Kontakt"
+		intro="Jeśli chcesz dokonać rezerwacji lub masz pytania, napisz do nas e-mail lub śmiało zadzwoń!"
+		address="Tűzoltó tér, Eger, Węgry"
+		email="romvari.peter@gmail.com"
+		phone="+36 30 638 7740"
+		phoneName="Vincze Jolán"
+		links={[
+			{ name: "Airbnb", href: "https://airbnb.com/h/kastelyapartman", logo: airbnbLogoFull },
+			{ name: "Booking.com", href: "https://www.booking.com/hotel/hu/kastely-apartman-eger.hu.html", logo: bookingLogo },
+			{ name: "Szállás.hu", href: "https://szallas.hu/kastely-apartman-eger", logo: logoSzallas }
+		]}
+	/>
+</Layout>

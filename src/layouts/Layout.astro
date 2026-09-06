@@ -20,9 +20,6 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : lang === 'pl' ? 'Kontakt' : '
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
@@ -81,9 +78,6 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : lang === 'pl' ? 'Kontakt' : '
 <style>
 	:global(html) {
 		scroll-behavior: smooth;
-	}
-
-	:global(html) {
 		--font-serif: 'Newsreader', Georgia, serif;
 		--font-sans: 'Inter', system-ui, sans-serif;
 	}
@@ -183,8 +177,9 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : lang === 'pl' ? 'Kontakt' : '
 		padding: 2rem;
 		font-size: 0.85rem;
 		color: #666;
-        background: #f5f4f2;
+		background: #f5f4f2;
 	}
+
 	@media (max-width: 480px) {
 		.site-band {
 			padding: 0 0.75rem;
@@ -196,12 +191,12 @@ const contactLabel = lang === 'hu' ? 'Kapcsolat' : lang === 'pl' ? 'Kontakt' : '
 		}
 
 		.band-lang {
-			font-size: 0.75rem
+			font-size: 0.75rem;
 			gap: 0.22em;
 		}
 
 		.band-logo {
 			height: 28px;
 		}
-	}	
+	}
 </style>
